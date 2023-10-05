@@ -14,12 +14,6 @@ namespace Project_MVC.Controllers
             _context = context;
         }
 
-
-
-
-
-
-
 		//上課頁面
 		public IActionResult Classstart (int? id) {
 
