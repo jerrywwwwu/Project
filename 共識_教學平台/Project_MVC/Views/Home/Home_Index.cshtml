@@ -1,0 +1,143 @@
+﻿@using Project_MVC.Models
+@model Tuple<IEnumerable<User>,IEnumerable<Post>,IEnumerable<ClassCourse>,IEnumerable<ViewPost>>
+@*@{
+    if (Context.Session.GetString("userID") != null)
+    {
+        Layout = "~/Views/Shared/_CommonLayout_userlist.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_CommonLayout_unlogin.cshtml";
+    }
+}*@
+@{
+    ViewData["Title"] = "共識 - 網站首頁";
+
+}
+
+
+@*首頁*@
+<div class="container paddingtopspacing">
+
+    <!-- 輪播圖 開始 -->
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @for (int i = 0; i < 3; i++)
+            {
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="@i" aria-label="Slide @i" class="@(i == 0 ?"active":"")" aria-current="@(i == 0 ? "true" : "")"></button>
+            }
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="bd-placeholder-img" width="100%" height="100%" style="max-height:600px;max-width:1270px;object-fit:cover;" src="~/images/49posttitleimg.jpg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" /><rect width="100%" height="100%" fill="#777" />
+                
+                <div class="container">
+                    <div class="carousel-caption bg-secondary rounded">
+                        <h1>@Model.Item3.FirstOrDefault().CourseName</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="bd-placeholder-img" width="100%" height="100%" style="max-height:600px;max-width:1270px;object-fit:cover;" src="~/images/164posttitleimg.jpg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" /><rect width="100%" height="100%" fill="#777" />
+
+                <div class="container">
+                    <div class="carousel-caption  bg-secondary rounded">
+                        <h1>@Model.Item2.FirstOrDefault().PostTitle.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="bd-placeholder-img" width="100%" height="100%" style="max-height:600px;max-width:1270px;object-fit:cover;" src="~/images/70posttitleimg.jpg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false" /><rect width="100%" height="100%" fill="#777" />
+
+                <div class="container">
+                    <div class="carousel-caption bg-secondary rounded">
+                        <h1>@Model.Item3.LastOrDefault().CourseName</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!-- 輪播圖 結束 -->
+    <br>
+
+    <!-- 文章列表 開始 -->
+    <section class="py-0 text-center container bg-light border border-dark border rounded">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8">
+                <h1 class="fw-dark">文章列表</h1>
+            </div>
+        </div>
+    </section>
+    <div class="container" id="custom-cards">
+        <div class="row row-cols-1 row-cols-lg-2 align-items-stretch g-4 py-5">
+            @foreach (var course in Model.Item4)
+            {
+                <div class="col">
+                    <div class="card card-cover h-100 text-white bg-dark rounded-5 shadow-lg" style="background-image: url('@course.PostrImgUrl'); background-repeat: no-repeat; background-position: center; ">
+                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                            <h2 class="mt-5 mb-4 display-6 lh-1 fw-bold bg-secondary rounded-1" style="background-color: rgba(0,0,0,0,5)">@course.PostTitle</h2>
+                            <ul class="d-flex list-unstyled mt-auto">
+                                <li class="me-auto">
+                                    <a asp-area="" asp-controller="Home_Post" asp-action="GetArticle" asp-route-id="@course.PostTitle" class="btn btn-primary btn-sm role="button" >了解更多</a>
+                                </li>
+                                <li class="d-flex align-items-center me-3">
+                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#geo-fill" /></svg>
+                                    <a asp-area="" asp-controller="Home_Post" asp-action="checkTag" asp-route-id="@course.PostTag1"><span class="badge-primary">@course.PostTag1</span></a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3" /></svg>
+                                    <a asp-area="" asp-controller="Home_Post" asp-action="checkTag" asp-route-id="@course.PostTag2"><small>@course.PostTag2</small></a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <svg class="bi me-2" width="1em" height="1em"><use xlink:href="#calendar3" /></svg>
+                                    <a asp-area="" asp-controller="Home_Post" asp-action="checkTag" asp-route-id="@course.PostTag3"><small>@course.PostTag3</small></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- 文章列表 結束 -->
+    <!-- 精選課程 開始 -->
+    <section class="py-0 text-center container bg-light border border-dark rounded">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8">
+                <h1 class="fw-dark">精選課程</h1>
+            </div>
+        </div>
+    </section>
+
+        <div class="container px-4 py-5" id="hanging-icons">
+            <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+                @*這裡用foreach 接 熱門課程資料*@
+                @foreach (var hotclass in Model.Item3)
+                {
+                <div class="py-1 col d-flex align-items-start border border-dark rounded p-3" style="position: relative; max-height:225px">
+                        <div class="icon-square bg-light text-dark flex-shrink-0 me-3" style="position: relative; max-height:auto; width: 50%;object-fit:cover;">
+                        <img src="@hotclass.CourseImageUrl" class="h-75 img-fluid img-thumbnail rounded" alt="課程圖片" style="max-height:200px ">
+                        </div>
+                        <div>
+                            <h2>@hotclass.CourseName</h2>
+                            <p class="text-truncate" style="max-width:200px;">@hotclass.CourseIntro</p>
+                            <a asp-area="" asp-controller="Home_Course" asp-action="Classpage" asp-route-id="@hotclass.CourseId" class="btn btn-primary">
+                                了解更多
+                            </a>
+                        </div>
+                    </div>
+                }
+             </div>
+        </div>
+
+    <!-- 精選課程 結束 -->
+
+</div>

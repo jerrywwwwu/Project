@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Project_MVC.Models.ClassCourse>
+@{
+    ViewData["Title"] = "共識 - 商品分類";
+}
+<!-- 所有課程 開始 -->
+<div class="container paddingtopspacing">
+    <div class="container py-3">
+        <!-- Breadcrumb 頁籤區塊 -->
+        <!-- 按下指定的頁簽 會回到相對應的頁面 -->
+        <nav aria-label="breadcrumb" class="p-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_Index">所有課程</a></li>
+                <li class="breadcrumb-item active" aria-current="page">程式語言</li>
+            </ol>
+        </nav>
+
+        <!-- 標題區塊 -->
+        <header>
+            <div class="pricing-header p-1 pb-md-4 mx-auto">
+                <h1 class="display-4 fw-normal">程式語言</h1>
+                <button type="button" class="btn btn-outline-secondary">HTML</button>
+                <button type="button" class="btn btn-outline-secondary">CSS</button>
+                <button type="button" class="btn btn-outline-secondary">JavaScript</button>
+                <button type="button" class="btn btn-outline-secondary">Bootstrap</button>
+                <button type="button" class="btn btn-outline-secondary">JQuery</button>
+                <h6 class="display-4 fw-normal border-bottom p-1"></h6>
+            </div>
+        </header>
+
+        <!-- 搜尋框 -->
+        <div class="input-group mb-3">
+            <form method="post" action="~/Home_Shopping/Shopping_Children">
+                <input type="text" name="SearchKeyword" class="form-control" placeholder="搜尋要找的課程名稱..." aria-label="Lesson's name" aria-describedby="button-addon">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon">搜尋</button>
+            </form>
+        </div>
+
+        <!-- 課程區塊 -->
+        @*資料庫沒有資料：老師、時數、分類、說明文字*@
+        <main class="mb-2 p-2 rounded bg-dark">
+            <div class="row row-cols-1 row-cols-md-3 mb-3">
+                @foreach (var course in Model)
+                {
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <img src="https://fakeimg.pl/400x250/" class="img-fluid rounded" alt="課程圖片">
+                            <div class="card-body">
+                                <h2 class="card-title pricing-card-title fw-bold">
+                                    @course.CourseName
+                                </h2>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>指導老師：錢達智</li>
+                                    <li>課程時數：128hrs</li>
+                                    <li>課程分類：攝影、人文、社會</li>
+                                    <li>說明：這是你一生中必須要上的一堂課程。這不是說說而已...</li>
+                                    <li>價格：@course.CoursePrice</li>
+                                </ul>
+                                <div class="text-center">
+                                    <div class="col">
+                                        <a asp-area="" asp-controller="Home_Course" asp-action="Course" class="btn btn-primary btn-sm role="button">了解更多</a>
+                                        <button type="button" class="btn btn-info btn-sm">加入購物車</button>
+                                        <button class="AddToCartBtn"><a href="/ShoppingAddToCarts/AddToCart?CID=@course.CourseId">加入購物車</a></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </main>
+        <!-- 回到最上層 開始 -->
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+	    <!-- 回到最上層 結束 -->
+    </div>
+</div>
+<!-- 所有課程 結束 -->

@@ -1,0 +1,90 @@
+﻿@model Project_MVC.Models.User
+
+@{
+    ViewData["Title"] = "共識 - 會員編輯";
+    @*放上個人照片*@
+    string IndexPersonalImage = ViewBag.ShowPersonalImage;
+    //var PersonalImageurl = IndexPersonalImage[0].UserImageUrl;
+}
+
+<div class="container paddingtopspacing">
+    <h1><strong>會員編輯</strong></h1>
+
+    <div class="row p-4">
+
+        @*左邊放原本的照片+預覽新換的照片*@
+        <div class="col p-1">
+            <div class="card" style="width: 17rem; height: 17rem; background-color:rgb(221, 212, 212);">
+                <div class="rounded-circle overflow-hidden" style="height: 17rem">
+                    <img id="PreviewImage" src=@IndexPersonalImage class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover; background-color: rgb(221, 212, 212);" onload="AdjustImageSize()">
+                </div>
+            </div>
+        </div>
+
+        @*右邊放資料填寫*@
+        <div class="col col-md-8 p-2">
+            <form asp-controller="Home_Login" asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="UserId" />
+                <div class="form-group py-1">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" placeholder="請輸入你的名字" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="UserGender" class="form-label"></label>
+                    <select asp-for="UserGender" class="form-select" required>
+                        <option value="Male">男性</option>
+                        <option value="Female">女性</option>
+                    </select>
+                    <span asp-validation-for="UserGender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group py-1">
+                    <label asp-for="UserEmail" class="control-label"></label>
+                    <input asp-for="UserEmail" class="form-control" readonly />
+                    <span asp-validation-for="UserEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="UserPassword" class="control-label"></label>
+                    <input asp-for="UserPassword" class="form-control" placeholder="請輸入新的密碼" />
+                    <span asp-validation-for="UserPassword" class="text-danger"></span>
+                </div>
+
+                @*這是註冊會員的時間，但不可能讓他修改，因為這是註冊當下電腦自動判斷的*@
+                <div class="form-group py-1" hidden>
+                    <label asp-for="UserCreateTime" class="control-label"></label>
+                    <input asp-for="UserCreateTime" class="form-control" />
+                    <span asp-validation-for="UserCreateTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group py-1">
+                    <label asp-for="UserImageUrl" class="control-label"></label>
+                    <input asp-for="UserImageUrl" class="form-control" name="img" type="file" />
+                    <span asp-validation-for="UserImageUrl" class="text-danger"></span>
+                </div>
+                @*測試用成選取的*@
+                @*<div class="form-group">
+                <div class="custom-file">
+                <label asp-for="UserImageUrl" class="custom-file-label"></label>
+                <input type="file" asp-for="UserImageUrl" class="custom-file-input" id="PhotoInput" />
+                </div>
+                </div>*@
+                <div class="form-group">
+                    <input type="submit" value="儲存" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-danger">取消</a>
+                    <a asp-controller="Home_Course" asp-action="TeacherDataCreate" asp-route-id="@Model.UserId" class="btn btn-success">新增老師個人介紹</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+@*<div> <a asp-action="Index">Back to List</a></div>*@
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+ }

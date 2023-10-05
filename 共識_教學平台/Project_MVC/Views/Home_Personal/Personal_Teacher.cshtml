@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Project_MVC.Models.ViewTeacherCourse>
+@{
+    ViewData["Title"] = "共識 - 老師頁面(老師的資料)";
+    //string? teacherName = ViewData["TeacherName"] as string;
+
+    //政修新增部分
+    var userImage = ViewBag.Image;
+}
+<!-- 個人編輯頁面 開始 -->
+<div class="container py-5 mb-5 paddingtopspacing">
+    <div class="row p-4">
+        <div class="col p-3">
+            <div class="row row-md-2 p-2">
+                <div class="p-3 card shadow-sm">
+                    <div class="p-3 bg-info text-dark border border-dark rounded-2 text-center">
+                        <img src="@userImage" alt="大頭照" class="mb-3 rounded-circle">
+                        <div class="text-center ">
+                            <h1>@Model.FirstOrDefault().UserTeacherName</h1>
+                        </div>
+                    </div>
+                    <div class="card-body row row-10 p-3">
+                        <div class="">
+                            <h6 class="card-title">關於我</h6>
+                            <p class="card-text">@Model.FirstOrDefault().UserIntro1</p>
+                            <h6 class="card-title">我的專長</h6>
+                            <p class="card-text">@Model.FirstOrDefault().UserIntro2</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col col-md-8 p-4">
+            <!-- 置頂公告 -->
+@*            <div class="row p-2">
+                <div class="col">
+                    <div class="card-header">
+                        <h5 class="fw-bold text-center">置頂公告</h5>
+                    </div>
+                    <div class="card shadow-sm rounded">
+                        <img src="https://fakeimg.pl/200x125/">
+                        <div class="card-body">
+                            <p>這裡提供老師輸入老師自己的最新消息</p>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            <!-- 老師課程 -->
+            <div class="row m-2 border-light">
+                <h4>老師課程</h4>
+            </div>
+            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
+                <!-- 要排成row 、 在row 的時候只要1欄 、 在 sm 裝置大小的時候 會顯示1個欄位  -->
+                @*這裡跟shopping_index 的模樣一樣，所以資料來源一樣，要多加where TeacherID = 老師編號(或是名稱)*@
+                @foreach (var item in Model)
+                {
+                    <div class="col card-container">
+                        <div class="card mb-4 rounded-3 shadow-sm" style="height:450px;">
+                            <div class="text-center text-align-center" style="position: relative; height: 50%;overflow: hidden;">
+                                <img src="@item.CourseImageUrl" class="img-fluid rounded" alt="課程圖片">
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title pricing-card-title fw-bold">
+                                    <h5 class="card-text fw-bold">@item.CourseName</h5>
+                                </h2>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>指導老師：@item.UserTeacherName</li>
+                                    <li>課程時數：@item.CourseDuration 分鐘</li>
+                                    <li class="text-truncate" style="max-width:200px;">說明：@item.CourseIntro</li>
+                                    <li>價格：@Convert.ToInt32(item.CoursePrice) NT$</li>
+                                </ul>
+                                <div class="text-center">
+                                    <div class="col">
+                                        <a asp-area="" asp-controller="Home_Course" asp-action="Classpage" asp-route-id="@item.CourseId" class="btn btn-primary btn-sm role="button">了解更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- 老師文章 -->
+            <!-- 標題 -->
+@*            <div class="row m-2 border-light">
+                <h4>老師文章</h4>
+            </div>*@
+            <!-- 呈現卡片 -->
+@*            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-2">
+                <!-- 要排成row 、 在row 的時候只要1欄 、 在 sm 裝置大小的時候 會顯示1個欄位  -->
+                @for (int i = 0; i < 2; i++)
+                {
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="https://fakeimg.pl/200x125/">
+
+                            <div class="card-body">
+                                <h5 class="card-text fw-bold">文章標題</h5>
+                                <p>文章內文第一段</p>
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">更多...</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>*@
+
+        </div>
+    </div>
+
+</div>
+<!-- 個人編輯頁面 結束 -->

@@ -1,0 +1,237 @@
+﻿@using Project_MVC.Models;
+@model IEnumerable<Project_MVC.Models.User>
+
+@{
+    ViewData["Title"] = "共識 - 會員目錄";
+    @*放上個人照片*@
+    var IndexPersonalImage = ViewBag.ShowPersonalImage as List<User>;
+    var PersonalImageurl = IndexPersonalImage.FirstOrDefault ().UserImageUrl;
+    var MyteacherClass = ViewBag.MyTeacherClass as List<ClassCourse>;
+    var buiedcourseindex = ViewBag.BuiedCoursesInIndex as List<ViewOrderDetailsInIndex>;
+}
+<link rel="stylesheet" href="~/jtc/lib/jquery/dist/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+@*<title>jQuery UI Tabs - Default functionality</title>*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+
+<style>
+    .Classcontainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    #tabs-1 .card:hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    #tabs-1 .card:hover .card-body::after {
+        content: "上課去";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        z-index: 2;
+    }
+
+    #tabs-2 .card:hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    /*    #tabs-2 .card:hover .card-body::after {
+            content: "編輯課程";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            z-index: 2;
+        }*/
+
+    a {
+        text-decoration: none;
+    }
+
+</style>
+<br />
+<br />
+
+<div class="container py-5 mb-5 paddingtopspacing">
+
+    <div class="row row-cols-1 row-cols-sm-1 g-2">
+        <div class="col col-md-4">
+            <div class="row row-md-2 p-2">
+                <div class="p-3 card shadow-sm" style="width: 40rem;">
+                    <div class="p-3 text-dark border border-dark rounded-2 text-center" style="background-color:lightblue">
+                        <div class="rounded-circle overflow-hidden" style="width: 10rem;height: 10rem;margin:auto;">
+                            <img src="@PersonalImageurl" alt="大頭照" class="mb-3 image-fluid img-thumbnail rounded-circle" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div hidden class="text-center">
+                            @foreach (var name in Model) {
+                                <h1>@name.UserName</h1>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="p-3 bg-white card-body row row-10">
+                        <div class="">
+                            @foreach (var name in Model) {
+                                <div class="card-head">
+
+                                    <p class="card-text"><h3>哈囉 @name.UserName</h3></p>
+                                    <p class="card-text"><h3>開始學習吧！</h3></p>
+                                </div>
+                            }
+                            @*編輯個人檔案的按鈕*@
+                            <table>
+                                <thead hidden>
+                                    <tr>
+                                        <th>使用者名稱</th>
+                                        <th>使用者性別</th>
+                                        <th>使用者信箱</th>
+                                        <th>使用者密碼</th>
+                                        <th>編輯帳號</th>
+                                        <th>檢視帳號</th>
+                                        <th>刪除帳號</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model) {
+                                        <tr>
+                                            <td hidden>@Html.DisplayFor(modelItem => item.UserName)</td>
+                                            <td hidden>@Html.DisplayFor(modelItem => item.UserGender)</td>
+                                            <td hidden>@Html.DisplayFor(modelItem => item.UserEmail)</td>
+                                            <td hidden>@Html.DisplayFor(modelItem => item.UserPassword)</td>
+                                            <td><a asp-action="Edit" asp-route-id="@item.UserId" class="btn btn-secondary">編輯個人檔案</a></td>
+                                            <td hidden><a asp-action="Details" asp-route-id="@item.UserId">帳號明細</a></td>
+                                            <td hidden><a asp-action="Delete" asp-route-id="@item.UserId">刪除帳號</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col col-md-8">
+            <!-- 學生內容 -->
+            <div class="row m-2 border-light" hidden>
+                <h3>個人檔案</h3>
+            </div>
+            <div class="row p-2">
+                <div class="col">
+
+
+                    <div id="tabs" style="text-align: left;">
+                        <ul>
+                            <li><a href="#tabs-1">我的課程</a></li>
+                            <li><a href="#tabs-2">我的開課</a></li>
+                        </ul>
+
+                        <!-- 自己購買的課程區 -->
+                        <div id="tabs-1">
+                            <div style="background-color: lightblue;">
+                                <div class="Classcontainer row ">
+
+                                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                                        @*用迴圈把購買的課程印在我的課程區上面*@
+                                        @foreach (var item in buiedcourseindex) {
+                                            <a asp-controller="Home_Course" asp-action="Classstart" asp-route-id="@item.CourseId">
+                                                <div class="col" style="height: 300px;">
+                                                    <div class="card h-100">
+                                                        <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                            <img src=@item.CourseImageUrl class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"><strong> @item.CourseName</strong> </h5>
+                                                            <h6 class="card-text" style="color:dimgrey; margin-bottom: 0;font-weight: 600"><strong>By @item.UserTeacherName </strong> </h6>
+                                                            <h6 class="card-text"><strong> 課程總時長：@item.CourseDuration 分鐘</strong> </h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- 自己上架的課程區 -->
+                        <div id="tabs-2">
+                            <a class="dropdown-item" asp-area="" asp-controller="Home_Course" asp-action="Classupload1">
+                                <button style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 4px;">
+                                    新增課程
+                                </button>
+                            </a>
+                            <div style="background-color: lightgreen;">
+                                <div class="Classcontainer row ">
+
+                                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                                        @*用迴圈把開的課程印在我的課程區上面*@
+                                        @foreach (var item in MyteacherClass) {
+                                            <div class="col" style="height: 300px;">
+                                                <div class="card h-100">
+                                                    <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                        <img src=@item.CourseImageUrl class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><strong> @item.CourseName</strong> </h5>
+                                                        <h6 class="card-text" style="color:dimgrey; margin-bottom: 0;font-weight: 600"><strong><a>By @ViewBag.userName</a></strong> </h6>
+                                                        <h6 class="card-text"><strong> 時數：@item.CourseDuration 分鐘</strong> </h6>
+                                                        <h6 class="card-text"><strong> NT$ @Convert.ToInt32(item.CoursePrice)</strong> </h6>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+

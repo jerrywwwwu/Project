@@ -1,0 +1,360 @@
+﻿@using Project_MVC.Models;
+
+@{
+    Layout = "_Layout_chat";
+
+    var ChatRoomHistory = ViewBag.ChatRoomHistory as List<ViewChatRoom>;
+    var ChatRoomHistory2 = ViewBag.ChatRoomHistory2 as List<ViewChatRoom>;
+
+    var Messageview = ViewBag.Messageview as List<ViewChatRoomMessage>;
+    var useridd = ViewBag.userIDindex;
+
+}
+
+<style>
+    /* 自訂 class 來覆蓋 Bootstrap 樣式 */
+    .no-color-btn {
+        background-color: transparent;
+        border-color: transparent;
+        color: inherit;
+    }
+
+
+
+    .custom-height {
+        /* 自訂高度，這裡使用 300px 作為示例 */
+        height: 350px;
+    }
+
+    .custom-height2 {
+        /* 自訂高度，這裡使用 300px 作為示例 */
+        height: 520px;
+    }
+
+
+    h1 {
+        font-size: 18px; /* 較小的字體大小 */
+        word-wrap: break-word; /* 讓標題自動換行 */
+    }
+</style>
+
+
+
+
+
+<!-- ======= Sidebar ======= -->
+
+<aside id="sidebar" class="sidebar">
+
+    <div class="pagetitle m-3" style="text-align: center;">
+        <h1>聊天紀錄</h1>
+    </div>
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+
+
+            @if (ChatRoomHistory == null)
+            {
+
+                <div class="card">
+                    <a href="#">
+                        <span>
+                            <img src="" alt="" class="rounded-circle m-2 bg-light"
+                                 style="margin-top:9px; display:inline;">
+                            <h4 style="display: inline;"> &nbsp; @ChatRoomHistory</h4>
+                        </span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                @foreach (var item in ChatRoomHistory)
+                {
+                    <div class="card">
+
+                        <span>
+                            <form asp-action="HistoryChatRoomId" asp-controller="Home_Post" method="post">
+                                <input type="text" name="chatRoomId" value="@item.ChatRoomId" style="display:none">
+
+
+                                <img src="@item.Posterimg" width="60px" alt="" class="rounded-circle m-2 bg-light"
+                                     style="margin-top:9px; display:inline;">
+                                <h4 style="display: inline; color:#191970"> &nbsp;  @item.PosterName </h4>
+                                <button type="submit" class="btn btn-light opacity-0">
+                                </button>
+
+                            </form>
+
+                        </span>
+
+                    </div>
+
+
+                }
+
+
+                @foreach (var item2 in ChatRoomHistory2)
+                {
+                    <div class="card">
+
+                        <span>
+                            <form asp-action="HistoryChatRoomId" asp-controller="Home_Post" method="post">
+                                <input type="text" name="chatRoomId" value="@item2.ChatRoomId" style="display:none">
+
+
+
+
+                                <img src="@item2.UserImageUrl" width="60px" alt="" class="rounded-circle m-2 bg-light"
+                                     style="margin-top:9px; display:inline;">
+                                <h4 style="display: inline; color:#191970"> &nbsp;  @item2.UserName </h4>
+                                <button type="submit" class="btn btn-light opacity-0">
+                                </button>
+
+                            </form>
+
+
+                        </span>
+
+
+
+                    </div>
+
+
+                }
+
+
+
+
+
+            }
+
+
+
+
+        </li><!-- End Dashboard Nav -->
+
+    </ul>
+
+</aside>
+
+<!-- ======= Sidebar ======= -->
+
+
+
+
+
+
+
+<div class="container-fluid ">
+
+    <div class="pagetitle">
+        <h1>訊息專區</h1>
+    </div><!-- End Page Title -->
+
+
+
+    <div class="col-md-12 align-items-center  container-fluid  ">
+
+        @if (Messageview == null)
+        {
+            <div class="card card-primary card-outline direct-chat direct-chat-primary shadow-none">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        無資料
+                    </h3>
+
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages">
+                        <!-- Message. Default to the left -->
+                        <div class="direct-chat-msg">
+                            <div class="direct-chat-infos clearfix">
+                                <span class="direct-chat-name float-left">Alexander Pierce</span>
+                                <span class="direct-chat-timestamp float-right">無資料</span>
+                            </div>
+                            <!-- /.direct-chat-infos -->
+                            <img class="direct-chat-img" src="~/assets/dist/img/user1-128x128.jpg" alt="Message User Image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                無資料
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+                        <!-- Message to the right -->
+
+                        <div class="direct-chat-msg right">
+                            <div class="direct-chat-infos clearfix">
+                                <span class="direct-chat-name float-right">Sarah Bullock</span>
+                                <span class="direct-chat-timestamp float-left">無資料</span>
+                            </div>
+                            <!-- /.direct-chat-infos -->
+                            <img class="direct-chat-img" src="~/assets/dist/img/user3-128x128.jpg" alt="Message User Image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                無資料
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+                    </div>
+                    <!--/.direct-chat-messages-->
+                    <!-- Contacts are loaded here -->
+                    <div class="direct-chat-contacts">
+                        <ul class="contacts-list">
+                            <li>
+                                <a href="#">
+                                    <img class="contacts-list-img" src="~/assets/dist/img/user1-128x128.jpg" alt="User Avatar">
+
+                                    <div class="contacts-list-info">
+                                        <span class="contacts-list-name">
+                                            Count Dracula
+                                            <small class="contacts-list-date float-right">2/28/2015</small>
+                                        </span>
+                                        <span class="contacts-list-msg">無資料</span>
+                                    </div>
+                                    <!-- /.contacts-list-info -->
+                                </a>
+                            </li>
+                            <!-- End Contact Item -->
+                        </ul>
+                        <!-- /.contatcts-list -->
+                    </div>
+                    <!-- /.direct-chat-pane -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-primary">發送</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-footer-->
+            </div>
+        }
+        else
+        {
+
+            <div class="card card-primary card-outline direct-chat direct-chat-primary shadow-none  custom-height2 ">
+                <div class="card-header">
+                    <div class="container">
+                        <div class="row  ">
+
+                            <div class=" col-lg-12 clo-sm-12 float-left m-2">
+
+                                <h4 class=" text-dark "> <mark><b>討論文章 : @ViewBag.ChatRoomPostTitle</b>  </mark> </h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!-- /.card-header -->
+                <div class="card-body   custom-height2">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages custom-height">
+
+
+                        @foreach (var items in Messageview)
+                        {
+
+                            @if (items.UserId == items.PosterId)
+                            {
+                                <!-- Message. Default to the left -->
+                                <div class="direct-chat-msg  ">
+
+                
+
+
+                                    <div class="direct-chat-infos clearfix">
+                                        <span class="direct-chat-name float-left">@items.UserName</span>
+
+                                    </div>
+                                    <!-- /.direct-chat-infos -->
+                                    <img class="direct-chat-img" src="@items.UserImageUrl" alt="Message User Image">
+                                    <!-- /.direct-chat-img -->
+                                    <div class="direct-chat-text direct-chat-text col-lg-5 clo-sm-5 float-left m-2">
+                                        @items.MessageContent <span class="badge bg-light text-dark m-2 float-right">@items.MessageTime</span>
+                                    </div>
+                                    <!-- /.direct-chat-text -->
+                                </div>
+                                <!-- /.direct-chat-msg -->
+                            }
+                            else
+                            {
+
+                                <!-- Message to the right -->
+                                <div class="direct-chat-msg right">
+                                    <div class="direct-chat-infos clearfix">
+                                        <span class="direct-chat-name float-right">@items.UserName</span>
+
+                                    </div>
+                                    <!-- /.direct-chat-infos -->
+                                    <img class="direct-chat-img" src="@items.UserImageUrl" alt="Message User Image">
+                                    <!-- /.direct-chat-img -->
+                                    <div class="direct-chat-text direct-chat-text  col-lg-5 clo-sm-5   bg-primary float-right  m-2">
+                                        @items.MessageContent <span class="badge bg-light text-dark m-2 float-right">@items.MessageTime</span>
+                                    </div>
+                                    <!-- /.direct-chat-text -->
+                                </div>
+                                <!-- /.direct-chat-msg -->
+                            }
+
+
+                        }
+
+
+
+
+
+
+
+                    </div>
+
+                    <!--/.direct-chat-messages-->
+                    <!-- Contacts are loaded here -->
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <form asp-action="creatNewMessage" asp-controller="Home_Post" method="post">
+                        <div class="input-group">
+                            <input type="text" name="MessageContent" placeholder="Type Message ..." class="form-control">
+                            <input type="text" name="ChatRoomId" value="@ViewBag.ChatRoomIds" style="display:none">
+                            <input type="text" name="UserId" value="@useridd" style="display:none">
+
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-primary">發送</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-footer-->
+            </div>
+
+        }
+
+    </div>
+
+
+
+
+    <!-- End #main -->
+    <!-- 主要內容 結束 -->
+    <!-- 回到最上層 開始 -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+    <!-- 回到最上層 結束 -->
+</div>

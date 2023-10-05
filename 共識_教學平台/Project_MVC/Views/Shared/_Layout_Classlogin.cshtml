@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"]</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="~/jtc/lib/img/favicon.png" rel="icon">
+    <link href="~/jtc/lib/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/jtc/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/jtc/lib/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/jtc/lib/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/jtc/lib/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/jtc/lib/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/jtc/lib/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/jtc/lib/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/jtc/css/style.css" rel="stylesheet">
+    <!-- 我用fontawesome 的 cdn -->
+    <script src="https://kit.fontawesome.com/4fca1e8039.js" crossorigin="anonymous"></script>
+    
+</head>
+
+<body >
+    <header >
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home_Index"><img src="~/jtc/lib/img/favicon.png" style="width:20px;height:20px"> 共識</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            課程區
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="p-1">熱門課程</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_Index">課程區首頁</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_TeacherList">找老師</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            技術討論區
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="p-1">熱門討論版</li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home_Post" asp-action="Post_Index">技能討論區首頁</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home_Post" asp-action="Post_InputData">發表文章</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home_Post" asp-action="Post_UserArticle">貼文管理</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home_Post" asp-action="Post_UserReserve">文章收藏</a></li>
+                        </ul>
+                    </li>
+                  @*  <li class="nav-item">
+                        <label class="nav-link disabled">目前是學生身分</label>
+                    </li>*@
+                </ul>
+
+                <!-- 購物車圖片 -->
+                <div class="px-3 pt-1 pb-3">
+                    <a asp-area="" asp-controller="ShoppingAddToCarts" asp-action="ShoppingCart">
+                        <img src="~/jtc/lib/img/cart.svg" width="25" height="25">
+                    </a>
+                </div>
+
+                        <!-- 個人帳戶 -->
+                        <li class="nav-item dropdown pe-3" id="changestate">
+                            <a class="nav-link nav-profile  d-flex align-items-center" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="@Context.Session.GetString("ImagesUrl")" alt="Profile" class="rounded-circle" style="height:50px;">
+                                <span class="d-none d-md-block dropdown-toggle ps-2"></span>
+                                @*依照登入狀態 顯示 session or 資料庫 的資料*@
+                            </a><!-- End Profile Iamge Icon -->
+
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">
+                                    <h6>使用者姓名</h6>
+                                    @*依照登入狀態 顯示 session or 資料庫 的資料*@
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home_Login" asp-action="Index">
+                                        <i class="bi bi-person"></i>
+                                        <span>個人資料</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    @*要做一個能夠前往相對應userID 的編輯資料區*@
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home_Login" asp-action="Edit" asp-route-id="">
+                                        <i class="bi bi-gear"></i>
+                                        <span>編輯帳戶</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    @*還沒有製作*@
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home_Login" asp-action="LogOut" id="logout">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                        <span>登出</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                
+
+            </div>
+        </div>
+    </nav>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                探索課程
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">所有課程</a></li>
+                                <li><a class="dropdown-item" href="#">音樂</a></li>
+                                <li><a class="dropdown-item" href="#">語言</a></li>
+                                <li><a class="dropdown-item" href="#">學科</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 導覽列 結束 -->
+        @*讀取 View() 的 cshtml*@
+
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+
+
+        <!-- Footer 開始 -->
+        <footer class="footer">
+            <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+                <div class="container py-5">
+                    <div class="row g-5">
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="text-white mb-3">購物區</h4>
+                            <ul>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_Index">課程區首頁</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_TeacherList">找老師</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_Children">找分類</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="text-white mb-3">技術討論區</h4>
+                            <ul>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Post" asp-action="Post_Index">技能討論區首頁</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Post" asp-action="Post_InputData">發表文章</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Post" asp-action="Post_UserArticle">文章管理</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Post" asp-action="Post_UserReserve">文章收藏</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Post" asp-action="Post_Chat">訊息專區</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="text-white mb-3">個人頁面區</h4>
+                            <ul>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Login" asp-action="Index">個人資料</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Login" asp-action="Index">編輯帳戶</a></li>
+                                <li><a class="btn btn-link" asp-area="" asp-controller="Home_Personal" asp-action="Personal_Student">我的課程</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h4 class="text-white mb-3">聯絡我們</h4>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>台中市南屯區公益路123號</p>
+                            <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>04-2222-1234</p>
+                            <p class="mb-2"><i class="fa fa-envelope me-3"></i>youknow@gmail.com</p>
+                            <div class="d-flex pt-2">
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+       
+        <!-- Footer 結束 -->
+        <!-- 回到最上層 開始 -->
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+            <i class="bi bi-arrow-up-short"></i>
+        </a>
+        <!-- 回到最上層 結束 -->
+        <!-- Vendor JS Files -->
+        <script src="~/jtc/lib/vendor/apexcharts/apexcharts.min.js"></script>
+        <script src="~/jtc/lib/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/jtc/lib/vendor/chart.js/chart.umd.js"></script>
+        <script src="~/jtc/lib/vendor/echarts/echarts.min.js"></script>
+        <script src="~/jtc/lib/vendor/quill/quill.min.js"></script>
+        <script src="~/jtc/lib/vendor/simple-datatables/simple-datatables.js"></script>
+        <script src="~/jtc/lib/vendor/tinymce/tinymce.min.js"></script>
+        <script src="~/jtc/lib/vendor/php-email-form/validate.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="~/jtc/js/main.js"></script>
+
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+       
+</html>
+
+

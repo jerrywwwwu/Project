@@ -1,0 +1,434 @@
+﻿@using Project_MVC.Models;
+@model IEnumerable<Project_MVC.Models.ViewClassPageTop>
+@{
+	if (Context.Session.GetString ("userID") != null) {
+		Layout = "_Layout_Classlogin";
+	}
+	else {
+		Layout = "_Layout_Class";
+	}
+	//ViewData["Title"] = Model.FirstOrDefault ().CourseName;
+	var ClassStarVideo = ViewBag.ClassStarVideos as List<ViewClassStartVideo>;
+	var ClassText = ViewBag.ClassTexts as List<ViewClassText>;
+	var useridd = ViewBag.UserIDindex;
+
+}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+	$(function () {
+		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+	});
+	$(function () {
+		$("#tab").tabs();
+	});
+
+</script>
+
+<style>
+	.ui-tabs-vertical {
+		width: 55em;
+	}
+
+		.ui-tabs-vertical .ui-tabs-nav {
+			padding: .2em .1em .2em .2em;
+			float: left;
+			width: 12em;
+		}
+
+			.ui-tabs-vertical .ui-tabs-nav li {
+				clear: left;
+				width: 100%;
+				border-bottom-width: 1px !important;
+				border-right-width: 0 !important;
+				margin: 0 -1px .2em 0;
+			}
+
+				.ui-tabs-vertical .ui-tabs-nav li a {
+					display: block;
+				}
+
+				.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+					padding-bottom: 0;
+					padding-right: .1em;
+					border-right-width: 1px;
+				}
+
+		.ui-tabs-vertical .ui-tabs-panel {
+			padding: 1em;
+			float: right;
+			width: 40em;
+		}
+
+	.background-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url(@ClassStarVideo.FirstOrDefault().CourseImageUrl);
+		background-color: rgba(0, 0, 0, 0.5);
+		opacity: 1.5;
+		background-size: cover;
+		background-repeat: no-repeat;
+		filter: blur(5px)brightness(50%);
+		z-index: -1;
+		order: 2px solid green;
+	}
+
+
+	/* 內容容器 */
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100% box-sizing: border-box; /* 使寬高包括內邊距和邊框 */
+		padding: 20px; /* 設置內邊距，避免內容緊貼邊框 */
+		/*border: 2px solid purple;*/
+	}
+
+	.rate {
+		border: none;
+		float: left;
+		height: 46px;
+		padding: 0 10px;
+	}
+
+	.rate input {
+			display: none; /* Hide the input elements */
+		}
+		.rate:not(:checked) > input {
+			position: absolute;
+			top: -9999px;
+		}
+
+		.rate:not(:checked) > label {
+			float: right;
+			width: 1em;
+			overflow: hidden;
+			white-space: nowrap;
+			cursor: pointer;
+			font-size: 30px;
+			color: #ccc;
+		}
+
+			.rate:not(:checked) > label:before {
+				content: '★ ';
+			}
+
+		.rate > input:checked ~ label {
+			color: #ffc700;
+		}
+
+		.rate:not(:checked) > label:hover, .rate:not(:checked) > label:hover ~ label {
+			color: #deb217;
+		}
+
+		.rate > input:checked + label:hover, .rate > input:checked + label:hover ~ label, .rate > input:checked ~ label:hover, .rate > input:checked ~ label:hover ~ label, .rate > label:hover ~ input:checked ~ label {
+			color: #c59b08;
+		}
+</style>
+
+
+
+
+
+<script>
+	//function checkComment(UserIds, PostIds) {
+
+	//	var CommentContent = $("#CommentB_" + PostIds).val();
+	//	var UserId = UserIds;
+	//	var PostId = PostIds;
+
+	//	$.ajax({
+	//		url: "@Url.Action("comments", "Home_Post")",
+	//		type: "POST",
+	//		dataType: 'json', // 指定要接收的数据类型为 JSON
+	//		data: { CommentContent: CommentContent, UserId: UserId, PostId: PostId },
+	//		success: function (data) {
+
+	//			console.log(data);
+
+	//			$("#CommentSS_" + PostIds).html(data.postCommentCount);
+
+
+	//			//$("#CommentS_" + ids).html(data.postCommentCount);
+
+
+
+
+	//			var html2 = `<b><p style="color: black ;">你的留言:</p></b><b><p style="color: black ;">${CommentContent}</p></b>`
+	//			$("#cut2_" + PostIds).append(html2 + "<br>" + "<hr>");
+	//			//$("#div_" + PostIds).append(html2);
+
+
+	//		},
+	//		error: function (error) {
+	//			console.log(error);
+	//		}
+	//	});
+	//};
+</script>
+
+
+
+
+
+
+
+
+<div class="background-overlay"></div>
+<div class="content-container">
+	<!-- 這裡可以放置內容 -->
+	<p></p>
+	<h1 style="color: white;">@ClassStarVideo.FirstOrDefault().CourseName</h1>
+	<p></p>
+
+
+	@*影片播放區域*@
+
+	<div class="container" style="display: flex; height: 70%;/* border: 1px solid black;*/">
+		<div id="tabs" class="row" style="width: 100%; margin: 0;background-color:rgba(0, 0, 0, 0.868);">
+			<div class="col-7" style="flex: 7; display: flex; justify-content: center; align-items: center; border: 1px solid /*red; overflow: hidden;*/">
+				@{
+					int j = 1;
+					@foreach (var item in ClassStarVideo) {
+						<div id="tabs-@j" style="width: 100%; height: 100%; object-fit: cover;">
+							<video controls poster="" style="width: 100%; height: 100%; object-fit: contain;">
+								<source src="@item.CourseVideo">
+							</video>
+						</div>
+						j++;
+					}
+				}
+			</div>
+			<div class="col-5" style="flex: 5; display: flex; justify-content: center; align-items: center; /*border: 1px solid yellow;*/">
+				<ul style="width: 100%; align-self: flex-start; padding: 0; margin: 0; list-style: none;">
+					@{
+						int i = 1;
+						@foreach (var item in ClassStarVideo) {
+
+							<li><a href="#tabs-@i">第 @i 章-@item.ChapterTitle</a></li>
+							i++;
+						}
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+@*影片撥放器over*@
+<p></p>
+<div id="tab" style="width: 100%;">
+	<ul class="container" style="display: flex; list-style: none; padding:0;">
+		<li class="col-6" style="text-align: center;">
+			<a href="#tab-x" style="display: block; width: 100%; height: 100%;">課程評價</a>
+		</li>
+		<li class="col-6" style="text-align: center;">
+			<a href="#tab-y" style="display: block; width: 100%; height: 100%;">內容簡介</a>
+		</li>
+	</ul>
+
+
+	<div id="tab-x">
+		<div class="row pt-2">
+			<div class="col-12">
+				@*<form id="commentForm" asp-controller="Home_Course" asp-action="ClassstartQA" method="post" class="pt-3">*@
+				<form asp-controller="Home_Course" asp-action="ClassstartQA" method="post" class="pt-3" id="form1">
+					<textarea placeholder="請在此輸入評價留言" style="width: 50%;" class="form-control pt-2" rows="3" id="comment" 
+							  name="CourseText"></textarea>
+					<input type="text" name="UserID" value="@ViewBag.UserIDindex" style="display:none" />
+					<input type="text" name="CourseID" value="@Model.FirstOrDefault().CourseId" style="display:none" />
+					<button type="submit" class="btn btn-dark" style="margin-top: 7px; margin-bottom: 5px;">留言</button>
+				</form>
+				<form asp-controller="Home_Course" asp-action="CourseScore"method="post"id="form2" >
+					<div class="rate" id="star">
+						<input type="radio" id="star5" name="Score" value=5 />
+						<label for="star5" title="text">5 stars</label>
+						<input type="radio" id="star4" name="Score" value=4 />
+						<label for="star4" title="text">4 stars</label>
+						<input type="radio" id="star3" name="Score" value=3 />
+						<label for="star3" title="text">3 stars</label>
+						<input type="radio" id="star2" name="Score" value=2 />
+						<label for="star2" title="text">2 stars</label>
+						<input type="radio" id="star1" name="Score" value=1 />
+						<label for="star1" title="text">1 star</label>
+					</div>
+					<input type="text" name="UserID" value="@ViewBag.UserIDindex" style="display:none" />
+					<input type="text" name="courseid" value="@Model.FirstOrDefault().CourseId" style="display:none" />
+					
+					@if (true) {
+						<button type="submit" class="btn btn-dark" style="margin-top: 7px; margin-bottom: 5px;">提交評分</button>
+					}else{
+						<button type="button" class="btn btn-dark" style="margin-top: 7px; margin-bottom: 5px; cursor: not-allowed; opacity: 0.7;" id="submitForm1" disabled>已評分</button>
+					}
+				</form>
+				
+	@*			<button type="button" id="sbmitbutton" class="btn btn-dark" style="margin-top: 7px; margin-bottom: 5px;">留言</button>
+				<script>
+					document.getElementById("sbmitbutton").addEventListener("click",async function(){
+						const form1 = document.getElementById("form1");
+						const form2 = document.getElementById("form2");
+						await form1.submit();
+						await form2.submit();
+					});
+					
+				</script>*@
+
+
+			</div>
+		</div>
+
+		@foreach (var Scoretext in ClassText) {
+		if (Model.FirstOrDefault ().CourseId == ClassText.FirstOrDefault ().CourseId) {
+			@*<div id="commentarea" class="row pt-2">*@
+			<div class="row pt-2">
+				<div class="col-12">
+					<div class="row" id="logotag">
+						<div class="col-sm-4 pt-2">
+							<ul class="list-group list-group-horizontal">
+								<li class="list-group-item " style="border: 0px; padding-right: 1px;">
+									<img src="@Scoretext.UserImageUrl" width="50px" alt="" class="rounded-circle"
+										 style="margin-top:10px;">
+								</li>
+								<li class="list-group-item" style="padding-top: 16px; border: 0px; padding-left: 2px;">
+									<div>
+										<h7 id="user"> &nbsp;@Scoretext.TextUser</h7> <br>
+										<h7 id="time"> &nbsp;@Scoretext.TextTime</h7>
+									</div>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<p id="commented" style="margin-top: 3px; color: rgb(83, 77, 77);">
+						留言評論:<br>
+						@Scoretext.CourseText
+					</p>
+				</div>
+				<hr>
+			</div>
+			}
+		}
+
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				document.getElementById("commentForm").addEventListener("submit", function (event) {
+					event.preventDefault(); // 阻止表單的默认提交行为
+
+					// 获取留言内容
+					var comment = document.getElementById("comment").value;
+
+					if (comment.trim() === "") {
+						return; // 中止留言處理
+					}
+
+					//$.ajax({
+     //       url: "@Url.Action("ClassstartQA", "Home_Course")",
+     //       type: "POST",
+     //       data: $("#commentForm").serialize(),
+     //       success: function (data) {
+     //           if (data.success) {
+     //               // 在畫面上顯示新的留言
+     //               var newComment = document.createElement("div");
+     //               newComment.className = "row pt-2";
+					//			newComment.innerHTML = `
+					//					  <div class="col-12">
+					//						<div class="row" id="logotag">
+					//						  <div class="col-sm-3 pt-2">
+					//							<ul class="list-group list-group-horizontal">
+					//							  <li class="list-group-item" style="border: 0px; padding-right: 1px;">
+					//								<img src="/Userimage.UserImageUrl" width="50px" alt="" class="rounded-circle" style="margin-top:10px;">
+					//							  </li>
+					//							  <li class="list-group-item" style="padding-top: 16px; border: 0px; padding-left: 2px;">
+					//								<div>
+					//								  <h7>&nbsp;你的留言</h7> <br>
+					//								</div>
+					//							  </li>
+					//							</ul>
+					//						  </div>
+					//						</div>
+					//						<p style="margin-top: 10px; color: rgb(83, 77, 77);">${comment}</p>
+					//					  </div>
+					//					  <hr>
+					//				`;
+
+                    var commentContainer = document.getElementById("commentarea");
+                    commentContainer.appendChild(newComment);
+
+                    // 清空留言框
+                    document.getElementById("comment").value = "";
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+
+
+
+
+					// 创建新的留言元素
+				//	var newComment = document.createElement("div");
+				//newComment.className = "row pt-2";
+				//newComment.innerHTML = `
+				//			  <div class="col-12">
+				//				<div class="row" id="logotag">
+				//				  <div class="col-sm-3 pt-2">
+				//					<ul class="list-group list-group-horizontal">
+				//					  <li class="list-group-item" style="border: 0px; padding-right: 1px;">
+				//						<img src="/Userimage.UserImageUrl" width="50px" alt="" class="rounded-circle" style="margin-top:10px;">
+				//					  </li>
+				//					  <li class="list-group-item" style="padding-top: 16px; border: 0px; padding-left: 2px;">
+				//						<div>
+				//						  <h7>&nbsp;Your Name</h7> <br>
+				//						  <h7>&nbsp;留言時間</h7>
+				//						</div>
+				//					  </li>
+				//					</ul>
+				//				  </div>
+				//				</div>
+				//				<p style="margin-top: 10px; color: rgb(83, 77, 77);">${comment}</p>
+				//			  </div>
+				//			  <hr>
+				//			`;
+
+				//	var commentContainer = document.getElementById("commentarea");
+				//	commentContainer.appendChild(newComment);
+
+				//	// 清空留言框
+				//	document.getElementById("comment").value = "";
+				});
+			});
+
+		</script>
+
+	</div>
+	<div id="tab-y">
+		<div class="container">
+			<div class="row">
+
+				<div class="card card-body ">
+					@Html.Raw(ClassStarVideo.FirstOrDefault().CourseContent)
+				</div>
+
+				<div class="col-4"></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+

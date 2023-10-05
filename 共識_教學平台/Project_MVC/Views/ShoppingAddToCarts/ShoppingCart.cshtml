@@ -1,0 +1,126 @@
+﻿@model IEnumerable<Project_MVC.Models.ViewBuiedCoursesName>
+
+@{
+    ViewData["Title"] = "共識 - 購物車清單";
+}
+
+<div class="container paddingtopspacing">
+    <div class="container">
+        <h1>購物車</h1>
+        <div class="row">
+            <div class="col">
+                @*這邊顯示流程step進行到哪裡，是購物區還是結帳區*@
+                <div class="row text-center">
+                    <div class="col col-lg-4"><button type="button" class="btn btn-outline-light" disabled></button></div>
+                    <div class="col col-lg-2"><button type="button" class="btn btn-secondary" disabled>購物車</button></div>
+                    <div class="col col-lg-2"><button type="button" class="btn btn-outline-secondary" disabled>結帳區</button></div>
+                    <div class="col col-lg-4"><button type="button" class="btn btn-outline-light" disabled></button></div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            @*<th scope="col">課程ID</th>*@
+                            <th scope="col">課程名稱</th>
+                            <th scope="col">課程價格 NT$</th>
+                            <th scope="col">選項</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model) {
+                            <tr data-courseid="@item.CourseId">
+                                @*<td>@item.CourseId</td>*@
+                                <td>@item.CourseName</td>
+                                <td>@Convert.ToInt32(item.CoursePrice)</td>
+
+                                <td>
+                                    <form id="deleteForm_@item.CourseId" asp-controller="ShoppingAddToCarts" asp-action="ShoppingCart" method="post">
+                                        <input type="text" name="ShoppingCartId" value="@item.ShoppingCartId" style="display:none">
+                                        <input type="text" name="UserId" value="@ViewBag.userid" style="display:none">
+                                        <input type="text" name="CourseId" value="@item.CourseId" style="display:none">
+                                        <input type="text" name="CartItemPrice" value="@item.CoursePrice" style="display:none">
+                                        <button type="button" class="btn btn-danger btn-sm deleteButton" onclick="confirmDelete(this, '@item.CourseId')">刪除</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+                @*帳單小卡*@
+                @{
+                    @*計算價格總和*@ int totalPriceSumCheck = Convert.ToInt32(Model.Sum(item => item.CoursePrice));
+                }
+
+                <div class="card w-50">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>訂單小計</strong></h5>
+                        <p id="totalPrice" class="card-text">訂單金額：NT$ @Convert.ToInt32(totalPriceSumCheck)</p>
+                        <button id="checkoutBtn" type="button" class="btn btn-primary">點我去結帳</button>
+                        <button id="continueShoppingBtn" type="button" class="btn btn-secondary">繼續去購物</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    @*刪除購物車裡面的課程，用sweetalert確認，然後同時更新目前購物車裡面的金額*@
+
+        function confirmDelete(button, courseId) {
+            event.preventDefault(); // 阻止表單的默認提交行為
+            Swal.fire({
+                title: '刪除課程',
+                text: '確定要刪除這門課程嗎？',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: '刪除',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 使用 AJAX 提交表單
+                    $.ajax({
+                        url: $("#" + "deleteForm_" + courseId).attr("action"),
+                        type: 'POST',
+                        data: $("#" + "deleteForm_" + courseId).serialize(),
+                        success: function (data) {
+                            // 成功處理返回的數據（可選）
+
+                            // 在前端刪除課程行
+                            $(button).closest("tr").remove(); // 選擇最近的父級<tr>元素並刪除
+                            Swal.fire('刪除成功', '', 'success');
+
+                            // 重新計算並更新價格
+                            var totalPriceSumCheck = 0;
+                            $(".table tbody tr").each(function () {
+                                var price = parseInt($(this).find("td:eq(1)").text()); // 第三個 <td> 元素是價格
+                                totalPriceSumCheck += price;
+                            });
+
+                            $("#totalPrice").text("訂單金額：NT$ " + totalPriceSumCheck);
+                        },
+                        error: function (error) {
+                            // 處理錯誤（可選）
+                        }
+                    });
+                }
+            });
+        }
+
+
+
+    @*使用者點下"繼續去購物"或"點我去結帳"後，導向指定的地方*@
+        document.getElementById("checkoutBtn").addEventListener("click", function () {
+            window.location.href = "/ShoppingAddToCarts/ShoppingCheckout";
+        });
+
+        document.getElementById("continueShoppingBtn").addEventListener("click", function () {
+            window.location.href = "/Home_Shopping/Shopping_Index";
+        });
+</script>

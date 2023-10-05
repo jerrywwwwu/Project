@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "共識 - 前導頁";
+}
+<div class="container-fluid bg-info pb-2 paddingtopspacing">
+    <!-- 大標題 & Logo 開始 -->
+    <div class="row align-content-center py-5 mb-5" style="height:100vh">
+        <div class="col">
+            <div class="py-5">
+                <div class="text-center">
+                    <h1 class="display-3 text-black animated slideInDown">知識共享網站</h1>
+                </div>
+            </div>
+            <div class="text-center">
+                <a class="btn btn-success py-1 px-2 mt-1" asp-area="" asp-controller="Home" asp-action="Home_Index">開始使用</a>
+                <a href="#start">這是什麼？</a>
+            </div>
+        </div>
+    </div>
+    <!-- 大標題 & Logo 結束 -->
+
+
+    <!-- 介紹網站名稱 開始 -->
+    <br id="start">
+    <div class="container-xxl py-5" style="height:100vh">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <h1 class="section-title mb-4 text-start">知識共享網</h1>
+                    <p class="mb-4">這裡是一個能夠讓你學到各種技能與知識的地方你可以是學生、也可以是老師。</p>
+                    <p class="mb-4">學生就是學、老師就是教。問問題、找夥伴、找同好、找課程</p>
+                    <p class="mb-4">問問題、找夥伴、找同好、找課程</p>
+                </div>
+                <!-- 放Logo圖片 -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="img-fluid position-absolute w-100 h-100" src="~/jtc/lib/img/logo.jpg" alt="" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-xxl py-5" style="height:50vh">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <h1 class="mb-4">學生 & 老師</h1>
+                    <p class="mb-4">按到學生的時候，這裡會顯示學生的介紹「你是學生，你的職責就是學習」 個人版面、共同興趣(疑問)討論版、課程使用</p>
+                    <p class="mb-4">按到老師的時候，這裡會顯示老師的介紹「你是老師，你的職責就是教導」 個人版面、課程安排、訊息回復....</p>
+                </div>
+                <!-- 學生、老師切換介紹 -->
+@*                <div class="col-lg-6 align-content-center">
+                    <div class="wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="container-xxl py-2 text-center">
+                            <input type="radio" class="btn-check" name="options" id="studentoption1" autocomplete="off" checked>
+                            <label class="btn btn-danger py-2 px-5 mt-1" for="studentoption1">看學生功能</label>
+
+                            <input type="radio" class="btn-check" name="options" id="teacheroption2" autocomplete="off">
+                            <label class="btn btn-success py-2 px-5 mt-1" for="teacheroption2">看老師功能</label>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+    <!-- 介紹網站名稱 結束 -->
+
+    <!-- 身分介紹 開始 -->
+    <div class="container-xxl py-5 rounded-3" style="background-color: lightgoldenrodyellow;">
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <div class="position-relative h-100">
+                            <img class="img-fluid position-absolute w-100 h-100 rounded-3" src="~/jtc/lib/img/Index_laptop.png" alt="" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <h1 class="mb-4">首頁區</h1>
+                        <p class="mb-4">按到學生的時候，這裡會顯示學生的介紹「你是學生，你的職責就是學習」 個人版面、共同興趣(疑問)討論版、課程使用</p>
+                        <p class="mb-4">按到老師的時候，這裡會顯示老師的介紹「你是老師，你的職責就是教導」 個人版面、課程安排、訊息回復....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <div class="position-relative h-100">
+                            <img class="img-fluid position-absolute w-100 h-100 rounded-3" src="~/jtc/lib/img/Course_laptop.png" alt="" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <h1 class="mb-4">課程區</h1>
+                        <p class="mb-4">按到學生的時候，這裡會顯示學生的介紹「你是學生，你的職責就是學習」 個人版面、共同興趣(疑問)討論版、課程使用</p>
+                        <p class="mb-4">按到老師的時候，這裡會顯示老師的介紹「你是老師，你的職責就是教導」 個人版面、課程安排、訊息回復....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <div class="position-relative h-100">
+                            <img class="img-fluid position-absolute w-100 h-100 rounded-3" src="~/jtc/lib/img/Personal_laptop.png" alt="" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <h1 class="mb-4">個人區</h1>
+                        <p class="mb-4">按到學生的時候，這裡會顯示學生的介紹「你是學生，你的職責就是學習」 個人版面、共同興趣(疑問)討論版、課程使用</p>
+                        <p class="mb-4">按到老師的時候，這裡會顯示老師的介紹「你是老師，你的職責就是教導」 個人版面、課程安排、訊息回復....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <div class="position-relative h-100">
+                            <img class="img-fluid position-absolute w-100 h-100 rounded-3" src="~/jtc/lib/img/Course_laptop.png" alt="" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" style="min-height: 300px;">
+                        <h1 class="mb-4">技術討論區</h1>
+                        <p class="mb-4">按到學生的時候，這裡會顯示學生的介紹「你是學生，你的職責就是學習」 個人版面、共同興趣(疑問)討論版、課程使用</p>
+                        <p class="mb-4">按到老師的時候，這裡會顯示老師的介紹「你是老師，你的職責就是教導」 個人版面、課程安排、訊息回復....</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 身分介紹 結束 -->
+
+</div>

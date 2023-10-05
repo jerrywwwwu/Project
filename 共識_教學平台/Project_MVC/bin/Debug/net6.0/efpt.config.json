@@ -1,0 +1,199 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "ProjectDataBaseContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Project_MVC",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Books]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ChatRooms]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassCategory]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassChapter]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassContentImage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassCourses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassMessage]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassQA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassScore]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ClassText]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Comments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Messagess]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Posts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ShoppingAddToCarts]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ShoppingOrderDetails]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ShoppingOrders]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Thumbs]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Users]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserTeacher]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ViewBookUser]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewBuiedCoursesName]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewBuiedTotalPrice]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewChatRoom]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewChatRoomMessage]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewClassChapterCount]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewClassPageTop]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewClassQABefore]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewClassStartVideo]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewClassText]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewOrderDetailsInIndex]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPersonalIndexBuiedCourses]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPersonalOrderDetails]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPost]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPostBookCount]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPostComment]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPostCommentCount]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewPostThumbCount]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewTeacherCourse]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewUserCourse]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ViewUserTeacher]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "desktop-vq280hc.ProjectDataBase.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

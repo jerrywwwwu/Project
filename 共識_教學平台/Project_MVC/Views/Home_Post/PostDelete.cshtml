@@ -1,0 +1,73 @@
+﻿@model Project_MVC.Models.Post
+
+@{
+    ViewData["Title"] = "知識共享網 - 文章刪除";
+}
+<br>
+<br>
+<br>
+<br>
+<h3><b>確定要刪除此篇文章？</b></h3>
+<div>
+  
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+           文章分類
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PostCategory)
+        </dd>
+        <dt class="col-sm-2">
+            文章標題
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PostTitle)
+        </dd>
+        <dt class="col-sm-2">
+            發文時間
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PostPublishTime)
+        </dd>
+        <dt class="col-sm-2">
+            發文內容
+        </dt>
+        <dd class="col-sm-10">
+            @Html.Raw(Model.PostContent)
+        </dd>
+        <dt class="col-sm-2">
+           標籤1
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PostTag1)
+        </dd>
+        <dt class="col-sm-2">
+            標籤2
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PostTag2)
+        </dd>
+        <dt class="col-sm-2">
+            標籤3
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PostTag3)
+        </dd>
+        <dt class="col-sm-2">
+           作者
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+    </dl>
+
+    <form asp-controller="Home_Post" asp-action="PostDelete" asp-route-id="@Model.PostId">
+        <input type="submit" value="確定刪除" class="btn btn-danger" />  |
+        <a asp-action="Post_UserArticle">返回文章管理</a>
+
+    </form>
+
+
+
+</div>

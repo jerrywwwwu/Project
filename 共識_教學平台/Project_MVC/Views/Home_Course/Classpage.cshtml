@@ -1,0 +1,437 @@
+﻿@using Project_MVC.Models;
+@model IEnumerable<Project_MVC.Models.ViewClassPageTop>
+@{
+	ViewData["Title"] = Model.FirstOrDefault ().CourseName;
+	if (Context.Session.GetString ("userID") != null) {
+		Layout = "_Layout_Classlogin";
+	}
+	else {
+		Layout = "_Layout_Class";
+	}
+
+
+	var useridd = ViewBag.UserIDindex;
+	var courseidd = ViewBag.CourseIDindex;
+	var Chaptercount = ViewBag.ChapterCount as ViewClassChapterCount;
+	var Userimage = ViewBag.UserImage as User;
+	var Classqa = ViewBag.ClassQA as List<ViewClassQabefore>;
+	var ClassCourse = ViewBag.ClassCourse as ClassCourse;
+	var ClassText = ViewBag.ClassTexts as List<ViewClassText>;
+	var ClassChapter = ViewBag.ClassChapter as List<ClassChapter>;
+	var check = ViewBag.checkvalue;
+}
+
+
+
+
+
+
+<main style="background-color:white;border-radius: 10px;" id="" class="">
+	<p></p>
+	<div class="pagetitle">
+		<nav>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">所有課程</a></li>
+				<li class="breadcrumb-item"><a href="#">@Model.FirstOrDefault().CourseCategoryName</a></li>
+				<li class="breadcrumb-item active"><a href="#">@Model.FirstOrDefault().CourseName</a></li>
+
+			</ol>
+		</nav>
+	</div>
+	<p></p>
+
+	<!-- 影片+介紹 -->
+	<div class="container" style="display: flex; height: 70%; /*border: 1px solid black;*/">
+		<div class="row" style="width: 100%; margin: 0; /*border:1px solid green*/">
+			<div class="col-7" style="/*border: 1px solid yellow;*/">
+				@*<div style="width: 100%; height: 100%; object-fit: cover; border: 1px solid blue;">*@
+				<video controls poster="@ClassCourse.CourseImageUrl" style=" border-radius:5px; width:100%;height: 100%; object-fit: cover; /*border: 1px solid blue;*/">
+					<source src="@Model.FirstOrDefault().CourseIntroVideo">
+				</video>
+				@*</div>*@
+
+			</div>
+			<div class="col-5" style="/*border: 1px solid red*/">
+				<p class="breadcrumb"><a href="" style="font-size:20px">@Model.FirstOrDefault().UserName</a></p>
+				<p style="font-size: 30px;"><strong>@Model.FirstOrDefault().CourseName</strong></p>
+				<p>@Model.FirstOrDefault().CourseIntro</p>
+				<br><br><br>
+
+
+			</div>
+		</div>
+	</div>
+</main>
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet" asp-append-version="true">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+@*宇彣測試*@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+<script>
+
+	function addToCart(courseId) {
+		console.log(courseId)
+		// 發送AJAX POST請求
+		$.ajax({
+			type: "POST",
+			url: "/Home_Shopping/CheckCourseExists", // 此處應該與Controller中的Action方法對應
+			data: { courseId: courseId }, // 傳遞CourseId作為參數
+			success: function (data) {
+				console.log(data)
+				// 請求成功處理返回的JSON結果
+				if (data.exists) {
+					// CourseId不存在於資料表中
+					Swal.fire('課程已經在購物車，勿重複新增', '', 'warning');
+				} else {
+					// CourseId存在於資料表中
+					Swal.fire('已將課程加入購物車!', '', 'success');
+				}
+			},
+			error: function () {
+				// 請求失敗的處理
+				$("#result").text("請求失敗，請稍後再試。");
+			}
+		});
+	}
+
+
+
+</script>
+
+
+
+<div class="container" style="">
+
+	<br />
+	<div class="pagetitle">
+		<h1>關於課程</h1>
+	</div>
+	<br />
+
+
+	<div class="container text-center">
+		<div class="row">
+			<div class="col-3 ">
+				<div class="container">
+					<div class="row align-items-center">
+						<img class="col-6" src="/Images/clock.png">
+						<div class="col-6">
+							<div>課程時數:</div>
+							<p><strong>@Chaptercount.CourseDuration 分鐘</strong></p>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-3  ">
+				<div class="container">
+					<div class="row align-items-center">
+						<img class="col-6" src="/images/play-button.png" alt="">
+						<div class="col-6">
+							<div>章節數:</div>
+							<p><strong>@Chaptercount.ChapterCount 章節</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-6  border"></div>
+			@*加入購物車開始*@
+			<div class="card" style="position: fixed; right: 15%; top: 55%; bottom:90% width: 200px; z-index: 1;box-shadow:0px 0px 10px rgba(0, 0, 0, 0.2);">
+				<div class="card-body" style="display: flex; flex-direction: column; align-items: flex-start;">
+					<h5 class="card-title">購買課程</h5>
+					<p class="card-text" style="font-size:30px">NT$@Convert.ToInt32(ClassCourse.CoursePrice)</p>
+					<button onclick="addToCart(@Model.FirstOrDefault().CourseId)"
+							class="btn btn-success"
+							style="width: 224px; height: 37.6px;">
+						加入購物車
+					</button>
+				</div>
+			</div>
+			@*加入購物車結束*@
+
+		</div>
+	</div>
+
+	<br />
+
+
+	@*<div class="container">*@
+
+		<div class="pagetitle">
+			<h1>課程內容</h1>
+		</div>
+
+		<div>
+			@*展開內容按鈕*@
+			<h2>
+				<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+						aria-expanded="false" aria-controls="collapseExample2">
+					展開
+				</button>
+			</h2>
+			@*產開內容按鈕*@
+			<div class="row">
+				<div class="col-8 collapse show" id="collapseExample2">
+					<div class="card card-body ">
+						@Html.Raw(ClassCourse.CourseContent)
+					</div>
+				</div>
+				<div class="col-4"></div>
+			</div>
+
+		</div>
+
+	@*</div>*@
+
+	@*<div class="container">*@
+		<br><br>
+		<div class="pagetitle">
+			<h1>單元一覽</h1>
+		</div>
+		@*產開章節按鈕*@
+		<h2>
+			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3"
+					aria-expanded="true" aria-controls="collapseExample3">
+				展開
+			</button>
+		</h2>
+		@*產開章節按鈕*@
+
+		@*展開章節*@
+		@*<div class="container">*@
+			<div class="row">
+				<div class="col-8 collapse show" id="collapseExample3">
+			<div class="card card-body" style="box-shadow:0px 0px 10px rgba(0, 0, 0, 0.2);">
+						@{
+							int chapterNumber = 1; // 章節編號，從1開始
+						}
+						@foreach (var chapter in ClassChapter) {
+							if (Model.FirstOrDefault ()?.CourseId == chapter.CourseId) // 檢查是否為同一個課程的章節
+							{
+								<div>第 @chapterNumber 章: @chapter.ChapterTitle</div>
+								chapterNumber++;
+							}
+						}
+					</div>
+					<div class="col-4"></div>
+				</div>
+			</div>
+		@*</div>*@
+		@*展開章節*@
+
+		<br><br>
+		<div class="row">
+		<div class="col-1 pagetitle">
+			<h1>看評價</h1>
+		</div>
+		<span class="col-2 text-start">@string.Format("{0:F1}",ViewBag.ClassScore)/5.0</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</div>
+		
+
+		@*展開評價按鈕*@
+		<div class="row" id="share">
+			<div class="col-sm-5 pt-2">
+				<div class="btn-group btn-group-sm">
+					<button data-bs-toggle="collapse" data-bs-target="#ALLCOMMENTAREA1" type="button"
+						class="btn btn-primary">
+						查看全部評價@*<span class="badge bg-info" style="margin: 2px;"></span>*@
+					</button>
+				</div>
+			</div>
+		</div>
+		@*展開評價按鈕結束*@
+
+		<!-- 下拉評論 -->
+		<div class="collapse show" id="ALLCOMMENTAREA1">
+			<div class="row" id="message" style="margin-top:5px;">
+				<div class="col-12">
+				</div>
+			</div>
+
+
+			@foreach (var Textdata in ClassText) {
+				if (Model.FirstOrDefault ().CourseId == Classqa.FirstOrDefault ().CourseId) {
+					<div class="container">
+						<div id="commentarea" class="row" id="commet">
+						<div class="col-8 collapse show" style="background-color:white;box-shadow:0px 0px 10px rgba(0, 0, 0, 0.2);">
+
+								<div class="row" id="logotag">
+									@*<div class="col-sm-4 pt-2">*@
+
+										<ul class="list-group list-group-horizontal">
+
+											<li class="list-group-item " style="border: 0px; padding-right: 1px;">
+												<img src="@Textdata.UserImageUrl" width="50px" alt="" class="rounded-circle"
+													 style="margin-top:10px;">
+											</li>
+
+											<li class="list-group-item" style="padding-top: 16px; border: 0px; padding-left: 2px;">
+												<div>
+													<h7> &nbsp;@Textdata.TextUser</h7> <br>
+													<h7> &nbsp;@Textdata.TextTime</h7>
+												</div>
+											</li>
+										</ul>
+									@*</div>*@
+								</div>
+
+
+								<p id="commented" style="margin-top: 3px; color: rgb(83, 77, 77);">
+									
+									@Textdata.CourseText
+								</p>
+
+							</div>
+							<div class="col-4"></div>
+							<p></p>
+						</div>
+					</div>
+				}
+			}
+		</div>
+	@*</div>*@
+	<br>
+	<br />
+
+
+
+
+
+	<div>
+		<div class="pagetitle">
+			<h1>講師問答</h1>
+		</div>
+		<div class="row" id="message" style="margin-top: 5px;">
+			<div class="col-8" style="background-color: white;box-shadow:0px 0px 10px rgba(0, 0, 0, 0.2);">
+				<form id="" asp-controller="Home_Course" asp-action="ClassQA" method="post" class="pt-3">
+					<textarea placeholder="請在此輸入你想詢問老師的購課問題" style="width: 100%;" class="form-control pt-2" rows="3" id="comment"
+							  name="CourseQAMessage"></textarea>
+					<input type="text" name="UserID" value="@useridd" style="display: none" />
+					<input type="text" name="CourseID" value="@Model.FirstOrDefault().CourseId" style="display: none" />
+					<button type="submit" class="btn btn-secondary" style="margin-top: 7px; margin-bottom: 5px; float: right;">送出</button>
+				</form>
+			</div>
+			<div class="col-4"></div>
+		</div>
+
+	</div>
+
+	<div class="row" id="share">
+		<div class="col-sm-5 pt-2">
+			<div class="btn-group btn-group-sm">
+				<button data-bs-toggle="collapse" data-bs-target="#ALLCOMMENTAREA" type="button"
+						class="btn btn-primary">
+					查看全部問答<span class="badge bg-info" style="margin: 2px;"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="collapse show" id="ALLCOMMENTAREA">
+
+
+		@foreach (var QAdata in Classqa) {
+			if (Model.FirstOrDefault ().CourseId == Classqa.FirstOrDefault ().CourseId) {
+
+			  <div class="container">
+					<div id="commentarea" class="row" id="commet">
+						<div class="col-8 collapse show" style="background-color:white; box-shadow:0px 0px 10px rgba(0, 0, 0, 0.2)">
+
+						<div class="row" id="logotag">
+							@*<div class="col-sm-4 pt-2">*@
+
+								<ul class="list-group list-group-horizontal">
+
+									<li class="list-group-item " style="border: 0px; padding-right: 1px;">
+										<img src="@QAdata.UserImageUrl" width="50px" alt="" class="rounded-circle"
+											 style="margin-top:10px;">
+									</li>
+
+									<li class="list-group-item" style="padding-top: 16px; border: 0px; padding-left: 2px;">
+										<div>
+											<h7> &nbsp;@QAdata.Qauser</h7> <br>
+											<h7> &nbsp;@QAdata.Qatime</h7>
+										</div>
+									</li>
+
+								</ul>
+							@*</div>*@
+						</div>
+
+
+						<p id="commented" style="margin-top: 3px; color: rgb(83, 77, 77);">
+							
+							@QAdata.CourseQamessage
+						</p>
+					</div>
+
+						<div class="col-4"></div>
+					<p></p>
+				</div>
+			  </div>
+			}
+		}
+	</div>
+
+
+
+	<script>
+		document.getElementById("commentForm").addEventListener("submit", function (event) {
+			event.preventDefault(); // 阻止表单的默认提交行为
+
+
+
+			// 获取留言内容
+			var comment = document.getElementById("comment").value;
+
+			if (comment.trim() === "") {
+				return; // 中止留言處理
+			}
+
+			// 创建新的留言元素
+			var newComment = document.createElement("div");
+			newComment.className = "row pt-2";
+			newComment.innerHTML = `
+				<div class="col-12">
+				div class="row" id="logotag">
+				 <div class="col-sm-3 pt-2">
+				<ul class="list-group list-group-horizontal">
+				  <li class="list-group-item" style="border: 0px; padding-right: 1px;">
+					<img src="/Userimage.UserImageUrl" width="50px" alt="" class="rounded-circle" style="margin-top:10px;">
+				  </li>
+				  <li class="list-group-item" style="padding-top: 16px; border: 0px; padding-left: 2px;">
+					<div>
+					  <h7>&nbsp;Your Name</h7> <br>
+					  <h7>&nbsp;留言時間</h7>
+					</div>
+				  </li>
+				</ul>
+				 </div>
+				/div>
+				p style="margin-top: 10px; color: rgb(83, 77, 77);">${comment}</p>
+				</div>
+				<hr>
+				`;
+
+			// 将新的留言元素添加到指定的div中
+			var commentContainer = document.getElementById("commentarea2");
+			commentContainer.appendChild(newComment);
+
+			// 清空留言框
+			document.getElementById("comment").value = "";
+		});
+
+	</script>
+	</main>
+</div>
+

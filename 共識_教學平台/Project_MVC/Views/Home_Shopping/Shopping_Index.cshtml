@@ -1,0 +1,163 @@
+﻿@model IEnumerable<Project_MVC.Models.ViewUserCourse>
+@{
+    ViewData["Title"] = "共識 - 商品首頁";
+}
+
+<style>
+    .fixed-image {
+        width: 200px;
+        height: 150px;
+        object-fit: cover; /* 讓圖片按比例填滿固定大小的區域，裁切多餘部分 */
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        flex: 0 0 calc(100% - 10px); /* 保留一些間距，這裡假設間距為 10px，每行 3 列 */
+        margin: 10px;
+    }
+</style>
+<!-- 所有課程 開始 -->
+<div class="container paddingtopspacing">
+    <div class="container py-3">
+        <!-- Breadcrumb 頁籤區塊 -->
+        <!-- 按下指定的頁簽 會回到相對應的頁面 -->
+        <nav aria-label="breadcrumb" class="p-2">
+            <ol class="breadcrumb">
+                <li><a class="dropdown-item" asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_Index">課程區首頁</a></li>
+            </ol>
+        </nav>
+
+        <!-- 標題區塊 -->
+        <header>
+            <div class="pricing-header p-1 pb-md-4 mx-auto">
+                <h1 class="display-4 fw-normal">所有課程</h1>
+                <div style="display: flex;">
+                    <form>
+                        <button class="btn btn-outline-secondary">
+                        <a class="dropdown-item" asp-area="" asp-controller="Home_Shopping" asp-action="Shopping_Index">所有課程</a>
+                        </button></form>
+                    <form method="post" action="~/Home_Shopping/Shopping_Index">
+                        <input type="text" name="CourseKeyword" class="form-control" value="程式" aria-label="Lesson's name" aria-describedby="button-addon" style="display:none">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon">程式語言</button>
+                    </form>
+                    <form method="post" action="~/Home_Shopping/Shopping_Index">
+                        <input type="text" name="CourseKeyword" class="form-control" value="語言" aria-label="Lesson's name" aria-describedby="button-addon" style="display:none">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon">語言</button>
+                    </form>
+                    <form method="post" action="~/Home_Shopping/Shopping_Index">
+                        <input type="text" name="CourseKeyword" class="form-control" value="音樂" aria-label="Lesson's name" aria-describedby="button-addon" style="display:none">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon">音樂</button>
+                    </form>
+                    <form method="post" action="~/Home_Shopping/Shopping_Index">
+                        <input type="text" name="CourseKeyword" class="form-control" value="投資理財" aria-label="Lesson's name" aria-describedby="button-addon" style="display:none">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon">投資理財</button>
+                    </form>
+                    <form method="post" action="~/Home_Shopping/Shopping_Index">
+                        <input type="text" name="CourseKeyword" class="form-control" value="運動" aria-label="Lesson's name" aria-describedby="button-addon" style="display:none">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon">運動</button>
+                    </form>
+                    <form method="post" action="~/Home_Shopping/Shopping_Index">
+                        <input type="text" name="CourseKeyword" class="form-control" value="其他" aria-label="Lesson's name" aria-describedby="button-addon" style="display:none">
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon">其他分類</button>
+                    </form>
+                </div>
+                <h6 class="display-4 fw-normal border-bottom p-1"></h6>
+            </div>
+        </header>
+
+        <!-- 搜尋框 -->
+        <div class="input-group mb-3">
+            <form class="d-flex" method="post" action="~/Home_Shopping/Shopping_Index">
+                <input type="text" name="CourseKeyword" class="form-control" placeholder="搜尋要找的課程名稱..." aria-label="Lesson's name" aria-describedby="button-addon">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon">Search</button>
+            </form>
+        </div>
+
+
+
+
+        <!-- 課程區塊 -->
+        @*資料庫沒有資料：老師、時數、分類、說明文字*@
+        <main class="mb-2 p-2 rounded bg-dark">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-3">
+
+
+
+                @foreach (var course in Model) {
+                    <div class="col card-container">
+                        <div class="card mb-4 rounded-3 shadow-sm" style="height: 500px">
+                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                <img src="@course.UserCourseImageUrl" class="h-100 card-img-top img-fluid img-thumbnail rounded" alt="課程圖片">
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title pricing-card-title fw-bold">
+                                    @course.CourseName
+                                </h2>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>指導老師：@course.UserCourseName</li>
+                                    <li>課程時數：@course.CourseDuration 分鐘</li>
+                                    <li class="text-truncate" style="max-width:200px;">說明：@course.CourseIntro</li>
+                                    <li>價格：@Convert.ToInt32(course.CoursePrice) NT$</li>
+                                </ul>
+                                <div class="text-center">
+                                    <div class="col">
+                                        <a asp-area="" asp-controller="Home_Course" asp-action="Classpage" asp-route-id="@course.CourseId" class="btn btn-primary btn-sm role="button">了解更多</a>
+                                        <button type="button" class="btn btn-info btn-sm" hidden>加入購物車</button>
+                                        <button class="AddToCartBtn btn btn-info btn-sm" onclick="addToCart(@course.CourseId)">加入購物車</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+
+
+
+        </main>
+        <!-- 回到最上層 開始 -->
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+            <i class="bi bi-arrow-up-short"></i>
+        </a>
+        <!-- 回到最上層 結束 -->
+    </div>
+</div>
+<!-- 所有課程 結束 -->
+
+
+<script>
+
+    function addToCart(courseId) {
+        console.log(courseId)
+        // 發送AJAX POST請求
+        $.ajax({
+            type: "POST",
+            url: "/Home_Shopping/CheckCourseExists", // 此處應該與Controller中的Action方法對應
+            data: { courseId: courseId }, // 傳遞CourseId作為參數
+            success: function (data) {
+                console.log(data)
+                // 請求成功處理返回的JSON結果
+                if (data.exists) {
+                    // CourseId不存在於資料表中
+                    Swal.fire('課程已經在購物車，勿重複新增', '', 'warning');
+                } else {
+                    // CourseId存在於資料表中
+                    Swal.fire('已將課程加入購物車!', '', 'success');
+                }
+            },
+            error: function () {
+                // 請求失敗的處理
+                $("#result").text("請求失敗，請稍後再試。");
+            }
+        });
+    }
+
+
+
+</script>

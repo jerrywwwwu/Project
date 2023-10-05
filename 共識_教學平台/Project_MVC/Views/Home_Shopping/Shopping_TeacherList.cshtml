@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Project_MVC.Models.ViewUserTeacher>
+@{
+    ViewData["Title"] = "共識 - 老師清單(會有很多老師可選)";
+}
+
+
+
+<style>
+    .fixed-image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover; /* 讓圖片按比例填滿固定大小的區域，裁切多餘部分 */
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        flex: 0 0 calc(100% - 10px); /* 保留一些間距，這裡假設間距為 10px，每行 3 列 */
+        margin: 10px;
+    }
+</style>
+
+
+
+
+<div class="container paddingtopspacing">
+    <div class="container py-3">
+        <!-- Breadcrumb 頁籤區塊 -->
+        <!-- 按下指定的頁簽 會回到相對應的頁面 -->
+        <nav aria-label="breadcrumb" class="p-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">老師列表</li>
+            </ol>
+        </nav>
+
+        <!-- 標題區塊 -->
+        <header>
+            <div class="pricing-header p-1 pb-md-4 mx-auto">
+                <h1 class="display-4 fw-normal">老師列表</h1>
+                <button type="button" class="btn btn-outline-secondary">程式(用tag分類)</button>
+                                                             @*這裡要使用 CourseCategory 的資料*@
+                <button type="button" class="btn btn-outline-secondary">語文(用tag分類)</button>
+                                                             @*這裡要使用 CourseCategory 的資料*@
+                <button type="button" class="btn btn-outline-secondary">藝術(用tag分類)</button>
+                                                             @*這裡要使用 CourseCategory 的資料*@
+                <h6 class="display-4 fw-normal border-bottom p-1"></h6>
+            </div>
+        </header>
+
+        <!-- 搜尋框 -->
+        <div class="input-group mb-3">
+            <form class="d-flex" method="post" action="~/Home_Shopping/Shopping_TeacherList">
+                <input type="text" name="TeacherKeyword" class="form-control" placeholder="搜尋要找的老師姓名..." aria-label="Lesson's name" aria-describedby="button-addon">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon">Search</button>
+            </form>
+        </div>
+
+        <!-- 課程區塊 -->
+        @*資料庫沒有資料：老師、時數、分類、說明文字*@
+        <main class="mb-2 p-2 rounded bg-dark">
+            <div class="row row-cols-1 row-cols-md-3 mb-3">
+                @foreach (var teacherlist in Model) {
+                    <div class="col card-container">
+                        <div class="card mb-4 rounded-3 shadow-sm" style="height:500px">
+                            <div class="text-center" style="position: relative; height: 50%; overflow; hidden;">
+                                <img src="@teacherlist.TeacherImage" class="h-100 img-fluid rounded-circle mt-3" alt="老師圖片">
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title pricing-card-title fw-bold">
+                                    @teacherlist.UserTeacherName
+                                </h2>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>關於我</li>
+                                    <li class="text-truncate" style="max-width:200px;">@teacherlist.UserIntro1</li>
+                                    <li>專長領域</li>
+                                    <li class="text-truncate" style="max-width:200px;"></li>
+                                    <li>個人簡介：</li>
+                                    <li class="text-truncate" style="max-width:200px;">@teacherlist.UserIntro2</li>
+                                </ul>
+                                <div class="text-center">
+                                    <div class="col">
+                                        <a asp-area="" asp-controller="Home_Personal" asp-action="Personal_Teacher" asp-route-id="@teacherlist.UserId" class="btn btn-primary btn-sm role="button">了解更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </main>
+        <!-- 回到最上層 開始 -->
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+            <i class="bi bi-arrow-up-short"></i>
+        </a>
+        <!-- 回到最上層 結束 -->
+    </div>
+</div>

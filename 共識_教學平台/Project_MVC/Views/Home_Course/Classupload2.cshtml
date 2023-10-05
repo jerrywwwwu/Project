@@ -1,0 +1,328 @@
+﻿@model Project_MVC.Models.ClassCourse
+
+@{
+    ViewData["Title"] = "Class Upload";
+    if (Context.Session.GetString ("userID") != null) {
+        Layout = "_Layout_Classlogin";
+    }
+    else {
+        Layout = "_Layout_Class";
+    }
+    //var useridd = ViewBag.userIDindex;
+
+
+}
+<body>
+
+    <!-- <main id="main" class="main"> -->
+    <!-- 這裡是切換點點 -->
+    <ul class="pagination d-flex justify-content-center align-items-center">
+        <li class="page-item">
+            <a class="page-link bg-transparent border-0" href="/Home_Course/Classupload1">
+                <i class="bi bi-circle"></i>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link bg-transparent border-0" href="/Home_Course/Classupload2">
+                <i class="bi bi-circle-fill"></i>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link bg-transparent border-0" href="/Home_Course/Classupload3">
+                <i class="bi bi-circle"></i>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link bg-transparent border-0" href="/Home_Course/Classupload4">
+                <i class="bi bi-circle"></i>
+            </a>
+        </li>
+    </ul>
+
+    <!-- 頁標 -->
+    <div class="pagetitle">
+        <h1 class="text-center">設計課程瀏覽頁</h1>
+    </div>
+    <!-- 這裡是藍背景區 -->
+    <div id="" class="container text-center" style="background-color: aqua;border-radius: 10px;height: 400px;">
+        <div>
+            <pre></pre>
+        </div>
+        <div class="row">
+
+            <!-- 影片 -->
+            <div class="col-6 text-start">
+                <p><video id="preview" controls style="border-radius:10px; width:80%;; height: auto;"></video></p>
+                <label for="Upload" class="border border-secondary border-2 rounded shadow-lg p-1 mb-5 bg-body"
+                       style="cursor: pointer;" onclick="addClickEffect()">
+                    <i class="bi bi-cloud-arrow-up"></i> 點擊上傳介紹影片
+                </label>
+                <input id="Upload" type="file" style="display: none;" accept="video/*,video/mp4" onchange="previewVideo(event)">
+            </div>
+            <script>
+                function previewVideo(event) {
+                    var input = event.target;
+                    var preview = document.getElementById('preview');
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            preview.src = e.target.result;
+                            preview.style.display = 'block';
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+            </script>
+
+            <!-- 課程概述 -->
+            <div class="col-6 text-start">
+                <p class="breadcrumb"><a href="">@ViewBag.userName</a></p>
+                <p style="font-size: 30px;">@ViewBag.CourseName</p>
+                <p>@ViewBag.CourseIntro</p>
+
+                <br><br><br><br><br><br><br>
+            </div>
+
+        </div>
+    </div>
+
+    <main id="" class="main my-3">
+        <div class="pagetitle">
+            <h1>關於課程</h1>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-3 border">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="/pokemon/pic.png" alt="">
+                            </div>
+                            <div class="col-6">
+                                <p>課程時數:</p>
+                                <p>小時</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="/pokemon/pic.png" alt="">
+                            </div>
+                            <div class="col-6">
+                                <p>單元數:</p>
+                                <p>小時</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 border">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <img src="/pokemon/pic.png" alt="">
+                            </div>
+                            <div class="col-6">
+                                <p>分類:</p>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 border"></div>
+            </div>
+        </div>
+    </main>
+
+    <main id="" class="main my-3" style="background-color: azure;">
+        <div class="pagetitle">
+            <h1>課程內容</h1>
+        </div>
+
+        <div>
+            <h2>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+                        aria-expanded="false" aria-controls="collapseExample2">
+                    展開
+                </button>
+            </h2>
+            <div class="collapse" id="collapseExample2">
+                <div class="card card-body">
+                    <div>
+                        <div id="summernote">1111</div>
+                        <div class="row mb-3">
+                            <div class="col-sm-10 text-start">
+                                <button type="submit" class="btn btn-primary">儲存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#summernote').summernote({
+                placeholder: 'Hello Bootstrap 4',
+                tabsize: 2,
+                height: 100
+            });
+        </script>
+    </main>
+
+    <main id="" class="main my-3" style="background-color: azure;">
+        <div class="pagetitle">
+            <h1>新增章節</h1>
+        </div>
+        <div style="width: 50%;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    展開全部單元
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <button id="createchapter"
+                                            class="btn btn-primary add-chapter-btn">
+                                        新增章節
+                                    </button>
+                                    <!-- <a class="" data-bs-toggle="collapse" href="#chaptercollapse" role="button"
+                                    aria-expanded="true" aria-controls="chaptercollapse"><i class="bi bi-cloud-arrow-up"></i></a> -->
+                                    <div id="chaptercollapse" class="collaps">
+                                        <div id="container">
+                                        </div>
+                                        <script>
+                                            // 按鈕點擊
+                                            document.querySelector('#createchapter').addEventListener('click', function (event) {
+                                                if (event.target.classList.contains('add-chapter-btn')) {
+                                                    // 章節容器
+                                                    var chapterContainer = document.createElement('div');
+                                                    chapterContainer.className = 'chapter';
+
+                                                    // 章節輸入框
+                                                    var chapterInput = document.createElement('input');
+                                                    chapterInput.type = 'text';
+                                                    chapterInput.className = 'form-control chapter-input col-2';
+                                                    chapterInput.style = "width: 30%";
+                                                    chapterInput.placeholder = '章節標題';
+
+                                                    // 包覆單元按鈕
+                                                    var controlContainer = document.createElement('div');
+                                                    controlContainer.className = 'd-flex align-items-center';
+
+                                                    // 创建新增刪除單元按钮
+                                                    var addUnitBtn = document.createElement('button');
+                                                    addUnitBtn.className = 'btn btn-primary add-unit-btn ms-2';
+                                                    addUnitBtn.textContent = '新增單元';
+
+                                                    var deleteBtn = document.createElement('button');
+                                                    deleteBtn.className = 'btn btn-danger delete-btn ms-2';
+                                                    deleteBtn.textContent = '刪除';
+
+                                                    var collapseBtn = document.createElement('button')
+                                                    collapseBtn.className = 'btn btn-danger delete-btn ms-2';
+
+
+                                                    // 创建單元容器
+                                                    var unitContainer = document.createElement('div');
+                                                    unitContainer.className = 'unit-container';
+
+                                                    // 刪除新增單元
+                                                    deleteBtn.addEventListener('click', function () {
+                                                        // 删除对应的單元容器
+                                                        chapterContainer.remove();
+
+                                                    });
+                                                    // 将章節标题输入框和新增單元按钮添加到控制容器中
+                                                    controlContainer.appendChild(chapterInput);
+                                                    controlContainer.appendChild(addUnitBtn);
+                                                    controlContainer.appendChild(deleteBtn);
+
+
+                                                    // 将控制容器添加到章節容器中
+                                                    chapterContainer.appendChild(controlContainer);
+
+                                                    // 将單元容器添加到章節容器中
+                                                    chapterContainer.appendChild(unitContainer);
+
+                                                    // 将章節容器添加到主容器中
+                                                    document.querySelector('#container').appendChild(chapterContainer);
+
+                                                    // 监听新增單元按钮的点击事件（在每个章節容器内）
+                                                    addUnitBtn.addEventListener('click', function () {
+                                                        // 创建單元输入框和删除按钮
+                                                        var unitInput = document.createElement('input');
+                                                        unitInput.type = 'text';
+                                                        unitInput.className = 'form-control unit-input col-3';
+                                                        unitInput.style = "width: 30%";
+                                                        unitInput.placeholder = '單元內容';
+
+                                                        var deleteBtn = document.createElement('button');
+                                                        deleteBtn.className = 'btn btn-danger delete-btn ms-2';
+                                                        deleteBtn.textContent = '刪除';
+
+                                                        var videoBtn = document.createElement('input')
+                                                        videoBtn.className = 'form-control';
+                                                        // videoBtn.textContent = "新增影片";
+                                                        videoBtn.id = "Upload";
+                                                        videoBtn.type = "file";
+                                                        // videoBtn.style = "display: none";
+                                                        videoBtn.accept = "video/*,video/mp4"
+
+
+                                                        // 创建容器来包裹單元输入框和删除按钮
+                                                        var unitControlContainer = document.createElement('div');
+                                                        unitControlContainer.className = 'd-flex align-items-center';
+
+                                                        // 将單元输入框和删除按钮添加到單元控制容器中
+                                                        unitControlContainer.appendChild(unitInput);
+                                                        unitControlContainer.appendChild(videoBtn);
+                                                        unitControlContainer.appendChild(deleteBtn);
+
+                                                        // 创建單元容器，并将單元控制容器添加进去
+                                                        var unitContainer = document.createElement('div');
+                                                        unitContainer.className = 'unit';
+                                                        unitContainer.appendChild(unitControlContainer);
+
+                                                        // 将單元容器添加到所属章節容器中
+                                                        chapterContainer.querySelector('.unit-container').appendChild(unitContainer);
+
+                                                        // 监听删除按钮的点击事件
+                                                        deleteBtn.addEventListener('click', function () {
+                                                            // 删除对应的單元容器
+                                                            unitContainer.remove();
+
+                                                        });
+                                                    });
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <br><br>
+                    <div class="col-sm-10 text-start">
+                        <button type="submit" class="btn btn-primary">儲存</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+</body>

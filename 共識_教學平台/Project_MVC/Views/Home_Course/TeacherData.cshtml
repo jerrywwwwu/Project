@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Project_MVC.Models.UserTeacher>
+
+@{
+   
+
+    var userid = ViewBag.userIDnumber;}
+
+<br>
+<h1>老師明細</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               關於我
+            </th>
+            <th>
+                我的專長
+            <th>
+                @Html.DisplayNameFor(model => model.UserBgimage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserIntro1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserIntro2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserBgimage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserEmail)
+            </td>
+            <td>
+                    <a asp-action="TeacherDataEdit" asp-route-id="@item.TeacherId">Edit</a> |
+                <a asp-controller="Home_Personal" asp-action="Personal_Teacher" asp-route-id="@userid">查看新增結果</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

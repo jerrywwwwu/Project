@@ -1,0 +1,14 @@
+﻿@{
+    if (Context.Session.GetString("userID") != null)
+    {
+        Layout = "~/Views/Shared/_CommonLayout_userlist.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_CommonLayout_unlogin.cshtml";
+    }
+
+
+    //Layout = "_CommonLayout_unlogin";
+
+}

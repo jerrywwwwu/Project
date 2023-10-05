@@ -1,0 +1,53 @@
+﻿@model Project_MVC.Models.UserTeacher
+
+@{
+   
+
+    var userid = ViewBag.userid;
+}
+<br>
+<br>
+<br>
+<h1>創建老師資料</h1>
+
+<h4>UserTeacher</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="TeacherDataCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label">使者編號</label>
+                <input type="text" name="UserId" value="@userid">
+            </div>
+            <div class="form-group">
+                <label asp-for="UserIntro1" class="control-label">關於我</label>
+                <input asp-for="UserIntro1" class="form-control" />
+                <span asp-validation-for="UserIntro1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserIntro2" class="control-label">我的專長</label>
+                <input asp-for="UserIntro2" class="form-control" />
+                <span asp-validation-for="UserIntro2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserBgimage" class="control-label"></label>
+                <input asp-for="UserBgimage" class="form-control" />
+                <span asp-validation-for="UserBgimage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

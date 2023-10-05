@@ -1,0 +1,411 @@
+﻿@using Project_MVC.Models;
+@model IEnumerable<Project_MVC.Models.ViewPost>
+@{
+    ViewData["Title"] = "知識共享網 - 文章管理";
+    var CommentData = ViewBag.CommentData as List<ViewPostComment>;
+    var useridd = ViewBag.userIDindex;
+}
+
+
+
+
+<style>
+    #cut2 {
+        border: 1px solid black; /* 1像素實線，黑色顏色 */
+    }
+</style>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+    function checkLike(ids) {
+        $.ajax({
+            url: "@Url.Action("Like", "Home_Post")",
+            type: "POST",
+            dataType: 'json', // 指定要接收的数据类型为 JSON
+            data: { id: ids },
+            success: function (data) {
+
+                console.log(data.postThumbCount);
+
+                $("#like_" + ids).html(data.postThumbCount);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    };
+
+
+
+    function checkBook(ids) {
+        $.ajax({
+            url: "@Url.Action("Book", "Home_Post")",
+            type: "POST",
+            dataType: 'json', // 指定要接收的数据类型为 JSON
+            data: { id: ids },
+            success: function (data) {
+
+                console.log(data);
+
+                $("#Book_" + ids).html(data.postBookCount);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+
+    };
+
+
+    function checkComment(UserIds, PostIds) {
+
+        var CommentContent = $("#CommentB_" + PostIds).val();
+        var UserId = UserIds;
+        var PostId = PostIds;
+
+        $.ajax({
+            url: "@Url.Action("comments", "Home_Post")",
+            type: "POST",
+            dataType: 'json', // 指定要接收的数据类型为 JSON
+            data: { CommentContent: CommentContent, UserId: UserId, PostId: PostId },
+            success: function (data) {
+
+                console.log(data);
+
+                $("#CommentSS_" + PostIds).html(data.postCommentCount);
+
+
+                //$("#CommentS_" + ids).html(data.postCommentCount);
+
+
+
+
+                var html2 = `<b><p style="color: black ;">你的留言:</p></b><b><p style="color: black ;">${CommentContent}</p></b>`
+                $("#cut2_" + PostIds).append(html2 + "<br>" + "<hr>");
+                //$("#div_" + PostIds).append(html2);
+
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    };
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+@*使用者文章專區*@
+<div class="container paddingtopspacing">
+    <!-- 側邊攔 開始 -->
+    <aside id="sidebar" class="sidebar">
+
+        <!-- 側邊欄位切換 -->
+        <i class="px-3 bi bi-list toggle-sidebar-btn"></i>
+
+        <!-- 列表 -->
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="Home_Post" asp-action="Post_Index">
+                    <i class="bi bi-grid"></i>
+                    <span>討論區首頁</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="Home_Post" asp-action="Post_UserArticle">
+                    <i class="bi bi-grid"></i>
+                    <span>我的文章</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-controller="Home_Post" asp-action="Post_UserReserve">
+                    <i class="bi bi-grid"></i>
+                    <span>我的收藏</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+            <!-- End Contact Page Nav -->
+        </ul>
+
+
+    </aside>
+    <!-- 側邊攔 結束-->
+    <!-- 主要內容 開始 -->
+    <main id="main" class="main my-3">
+
+        <div class="container-fluid align-items-center">
+            <!-- 搜尋欄 -->
+
+            <div class="d-flex justify-content-between">
+
+                <nav class="navbar navbar-light bg-light ">
+                    <div class="container-fluid">
+                        <form class="d-flex" method="post" asp-action="Search" asp-controller="Home_Post">
+                            <input class="form-control me-2" type="text" name="searchData" placeholder="搜尋文章" title="請輸入關鍵字">
+                            <button class="btn btn-outline-dark" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- 訊息、文章、發表 -->
+            <!-- 聊天室 havor 會出現聊天紀錄 開始-->
+            <nav class="header-nav ms-auto">
+                <ul class="px-3 py-2 d-flex">
+                    <li class="nav-item ">
+                        <a class="nav-link nav-icon" asp-area="" asp-controller="Home_Post" asp-action="Post_InputData">
+                            <input type="button" class="btn btn-outline-secondary text-nowrap" value="發表文章">
+                        </a>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a class="nav-link nav-icon" asp-area="" asp-controller="Home_Post" asp-action="Post_UserArticle">
+                            <input type="button" class="btn btn-outline-secondary text-nowrap" value="文章管理">
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link nav-icon" asp-controller="Home_Post" asp-action="blankChatRoom">
+                            <input type="button" class="btn btn-outline-secondary text-nowrap" value="聊天室">
+                        </a>
+                        <!-- End Messages Icon -->
+                      
+
+                    </li>
+
+                </ul>
+            </nav>
+            <hr>
+            <div class="pagetitle">
+                <h1>我的文章專區</h1>
+            </div><!-- End Page Title -->
+            @foreach (var item in Model)
+            {
+
+
+                <div id="Postarea" class="row pt-3">
+                    <div class="col-12">
+
+                        <div class="card">
+
+                            <div class="card-header">
+
+                                <a href="#">
+                                    <span>
+                                        <img src="@item.UserImageUrl" alt="" class="rounded-circle"
+                                             style="margin-top:10px; display:inline; width:70px">
+                                        <h4 style="display: inline;"> &nbsp; @item.UserName </h4>
+                                    </span>
+                                </a>
+
+                                <div style="display: inline; float: right;">
+                                    <h4><span class="badge bg-dark">@item.PostCategory</span></h4>
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+
+
+
+                                <h1 class="card-title mx-3"> <b>@item.PostTitle </b></h1>
+
+
+                                @if (@item.PostrImgUrl != null)
+
+                                {
+                                    <div class="container">
+
+                                        <div class="row ">
+
+                                            <div class="col-lg-4  col-sm-12 " m-1><img src="@item.PostrImgUrl" width="auto" height="auto" class="img-fluid m-1 " style="align-content:center"> </div>
+
+                                            <div class="col-lg-8 col-sm-12 align-self-center ">
+                                                @Html.Raw(item.PostContent)
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+                                else
+                                {
+
+                                    <p>
+                                        @Html.Raw(item.PostContent)
+                                    </p>
+
+                                }
+
+
+                            </div>
+
+                            <div class="card-footer">
+
+                                <div class="row" id="tag">
+                                    <div class="col-sm-5 pt-1">
+                                        <span class="badge bg-dark text-nowrap" style="font-size:15px;">@item.PostTag1</span>
+                                        <span class="badge bg-dark text-nowrap" style="font-size:15px;">@item.PostTag2</span>
+                                        <span class="badge bg-dark text-nowrap" style="font-size:15px;">@item.PostTag3</span>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row" id="share">
+                                    <div class="col-sm-5 pt-2">
+                                        <div class="btn-group btn-group-sm">
+
+
+                                            <button onclick="checkLike('@item.PostId')" class=" btn btn-light text-nowrap">
+                                                點讚
+                                                <span id="like_@item.PostId" style="margin: 2px;" class="badge bg-info ">
+                                                    @item.PostThumbCount
+                                                </span>
+                                            </button>
+
+
+                                            <button onclick="checkBook('@item.PostId')" id="book" class="btn btn-light text-nowrap">
+                                                收藏
+                                                <span id="Book_@item.PostId" style="margin: 2px;" class="badge bg-info ">
+                                                    @item.PostBookCount
+                                                </span>
+                                            </button>
+
+
+                                            <button data-bs-toggle="collapse" data-bs-target="#C_@item.PostId" type="button"
+                                                    class="btn btn-light text-nowrap ">
+                                                留言<span id="CommentSS_@item.PostId" class="badge bg-info"
+                                                        style="margin: 2px;">@item.PostCommentCount</span>
+                                            </button>
+
+
+                                            <a asp-controller="Home_Post" asp-action="PostEdit" asp-route-id="@item.PostId">
+                                                <button type="button" class="btn btn-light text-nowrap">修改</button>
+                                            </a>
+
+
+                                            <a asp-controller="Home_Post" asp-action="PostDelete" asp-route-id="@item.PostId">
+                                                <button src="" type="button" class="btn btn-light text-nowrap">刪除</button>
+                                            </a>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="container collapse " id="C_@item.PostId">
+                                    <div class="row" id="message" style="margin-top:5px;">
+                                        <div class="col-12">
+                                            <label for="comment">評論：</label>
+                                            <input type="text" name="UserId" value="@useridd" style="display:none">
+                                            <input type="text" name="PostId" value="@item.PostId" style="display:none">
+                                            <textarea type="text" class="form-control pt-2" rows="3" id="CommentB_@item.PostId" name="CommentContent"></textarea>
+                                            <button id="CommentSend_@item.PostId" onclick="checkComment('@useridd','@item.PostId')" class="formbutton btn btn-dark" style="margin-top:7px; margin-bottom:5px;">留言</button>
+                                        </div>
+                                    </div>
+                                   
+
+                                    <hr id="cut2_@item.PostId">
+
+                                    <div id="div_@item.PostId"></div>
+
+                                    @foreach (var Commentitem in CommentData)
+                                    {
+                                        if (item.PostId == Commentitem.PostId)
+                                        {
+                                            <div id="commentarea" class="row pt-2" id="commet"
+                                                 style="background-color: rgba(233, 227, 227, 0.147) ; ">
+                                                <div class="col-12">
+
+                                                    <div class="row" id="logotag">
+                                                        <div class="col-sm-3 pt-2">
+
+                                                            <ul class="list-group list-group-horizontal">
+
+                                                                <li class="list-group-item " style="border: 0px; padding-right: 1px;">
+                                                                    <img src="@Commentitem.UserImageUrl" width="50px" alt="" class="rounded-circle"
+                                                                         style="margin-top:10px;">
+                                                                </li>
+
+                                                                <li class="list-group-item" style="padding-top: 16px; border: 0px; padding-left: 2px;">
+                                                                    <div>
+                                                                        <h7> &nbsp;@Commentitem.CommentUser</h7> <br>
+                                                                        <h7> &nbsp;@Commentitem.CommentTime</h7>
+                                                                    </div>
+                                                                </li>
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <p id="commented" style="margin-top: 10px; color: rgb(83, 77, 77);">
+                                                        留言評論:@Commentitem.CommentContent
+                                                    </p>
+                                                </div>
+                                                <hr>
+                                            </div>
+                                        }
+
+
+
+                                    }
+
+
+
+
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+            }
+
+        </div>
+
+    </main>
+    <!-- 回到最上層 開始 -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+    <!-- 回到最上層 結束 -->
+	    <!-- 主要內容 結束 -->
+</div>

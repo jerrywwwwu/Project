@@ -1,0 +1,237 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Project_MVC
+build_property.RootNamespace = Project_MVC
+build_property.ProjectDir = C:\Users\User\Desktop\共識\共識_教學平台\Project_MVC\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\User\Desktop\共識\共識_教學平台\Project_MVC
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home/Home_Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lX0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home/Home_Leader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lX0xlYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/Classpage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcQ2xhc3NwYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/Classstart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcQ2xhc3NzdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/Classupload1.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcQ2xhc3N1cGxvYWQxLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/Classupload2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcQ2xhc3N1cGxvYWQyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/Course_Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcQ291cnNlX0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/TeacherData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcVGVhY2hlckRhdGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/TeacherDataCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcVGVhY2hlckRhdGFDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/TeacherDataEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcVGVhY2hlckRhdGFFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/test.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcdGVzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Course/View.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Db3Vyc2VcVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Login/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Mb2dpblxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Login/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Mb2dpblxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Login/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Mb2dpblxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Login/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Mb2dpblxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Mb2dpblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Login/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Mb2dpblxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Personal/Personal_Student.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9QZXJzb25hbFxQZXJzb25hbF9TdHVkZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Personal/Personal_StudentEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9QZXJzb25hbFxQZXJzb25hbF9TdHVkZW50RWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Personal/Personal_Teacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9QZXJzb25hbFxQZXJzb25hbF9UZWFjaGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Personal/Personal_TeacherEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9QZXJzb25hbFxQZXJzb25hbF9UZWFjaGVyRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Post/PostDelete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Qb3N0XFBvc3REZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Post/PostEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Qb3N0XFBvc3RFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Post/Post_Chat.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Qb3N0XFBvc3RfQ2hhdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Post/Post_Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Qb3N0XFBvc3RfSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Post/Post_InputData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Qb3N0XFBvc3RfSW5wdXREYXRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Post/Post_UserArticle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Qb3N0XFBvc3RfVXNlckFydGljbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Post/Post_UserReserve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9Qb3N0XFBvc3RfVXNlclJlc2VydmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Shopping/Shopping_Children.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9TaG9wcGluZ1xTaG9wcGluZ19DaGlsZHJlbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Shopping/Shopping_Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9TaG9wcGluZ1xTaG9wcGluZ19JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Home_Shopping/Shopping_TeacherList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZV9TaG9wcGluZ1xTaG9wcGluZ19UZWFjaGVyTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/_Layout_chat.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfY2hhdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/_Layout_Class.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfQ2xhc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/_Layout_Classlogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfQ2xhc3Nsb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/OrderDetailsTest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXE9yZGVyRGV0YWlsc1Rlc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/ShoppingCart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXFNob3BwaW5nQ2FydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/ShoppingAddToCarts/ShoppingCheckout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcHBpbmdBZGRUb0NhcnRzXFNob3BwaW5nQ2hlY2tvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/UserTeachersTest/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclRlYWNoZXJzVGVzdFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/UserTeachersTest/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclRlYWNoZXJzVGVzdFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/UserTeachersTest/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclRlYWNoZXJzVGVzdFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/UserTeachersTest/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclRlYWNoZXJzVGVzdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/UserTeachersTest/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclRlYWNoZXJzVGVzdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/_CommonLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db21tb25MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-pm49d9qps5
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/_CommonLayout_unlogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db21tb25MYXlvdXRfdW5sb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-t6bfm0ul1o
+
+[C:/Users/User/Desktop/共識/共識_教學平台/Project_MVC/Views/Shared/_CommonLayout_userlist.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Db21tb25MYXlvdXRfdXNlcmxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-30eyyhsppl

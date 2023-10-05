@@ -1,0 +1,299 @@
+﻿@{
+    ViewData["Title"] = "共識 - 個人頁面(使用者的會員資料)";
+}
+<link rel="stylesheet" href="~/jtc/lib/jquery/dist/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<style>
+    .Classcontainer {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    #tabs-1 .card:hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    #tabs-1 .card:hover .card-body::after {
+        content: "上課去";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        z-index: 2;
+    }
+
+    #tabs-2 .card:hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    #tabs-2 .card:hover .card-body::after {
+        content: "編輯課程";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        z-index: 2;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+</style>
+
+<!-- 個人編輯頁面 開始 -->
+<div class="container paddingtopspacing">
+    <div class="row">
+
+        <!-- 左邊留1span -->
+        <div class="col-md-1"><!-- 左邊aside留白 --></div>
+
+        <!-- 中間留10span -->
+        <div class="col-md-10">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><img src="./images/pokemon/025.png" alt=""></td>
+                        <td><h3>哈囉魏宇彣(UserName)，快點開始你的學習吧！</h3></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <!-- 這裡是用jQueryUI的tabs：https://jqueryui.com/tabs/ -->
+            <!-- https://ithelp.ithome.com.tw/articles/10240824 -->
+            <div id="tabs" style="text-align: left;">
+                <ul>
+                    <li><a href="#tabs-1">我的課程</a></li>
+                    <li><a href="#tabs-2">我的備課</a></li>
+                </ul>
+
+                <!-- 我的課程區 -->
+                <div id="tabs-1">
+                    <div style="background-color: lightblue;">
+                        <div class="Classcontainer row ">
+
+                            <div class="row row-cols-1 row-cols-md-4 g-4">
+
+                                <!-- 第一堂課 -->
+                                <a href="https://www.google.com">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/007_HarryPotterBlanket.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- 第二堂課 -->
+                                <a href="https://www.google.com">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/007_HarryPotterBlanket.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- 第三堂課 -->
+                                <a href="https://www.google.com">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/007_HarryPotterBlanket.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- 第四堂課 -->
+                                <a href="https://www.google.com">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/007_HarryPotterBlanket.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+
+                                <!-- 第五堂課-拿來確認比例調整的 -->
+                                <div class="col" style="height: 300px;">
+                                    <div class="card h-100">
+                                        <div class="card-img-container" style="position: relative; min-height: 50%; overflow: hidden;">
+                                            <img id="card-img" src="./images/ASP.NET MVC 教學- 由入門到進階- 9 比1 線上課程平台.jpg" class="card-img-top" alt="...">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                跟著實務學習ASP.NET MVC：第一次寫MVC就上手(附DVD一片)
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!--我的備課區 -->
+                <div id="tabs-2">
+                    <div style="background-color: lightblue;">
+                        <div class="Classcontainer row ">
+
+                            <div class="row row-cols-1 row-cols-md-4 g-4">
+
+                                <!-- 第一堂課 -->
+                                <a href="./EditClass.html">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/harrypotter.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <span><strong>備課：</strong></span>
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- 第二堂課 -->
+                                <a href="./EditClass.html">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/harrypotter.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <span><strong>備課：</strong></span>
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- 第三堂課 -->
+                                <a href="./EditClass.html">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/harrypotter.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <span><strong>備課：</strong></span>
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- 第四堂課 -->
+                                <a href="./EditClass.html">
+                                    <div class="col" style="height: 300px;">
+                                        <div class="card h-100">
+                                            <div class="card-img-container" style="position: relative; height: 50%; overflow: hidden;">
+                                                <img src="./images/harrypotter.jpg" class="card-img-top" alt="..." style="width: 100%; object-fit: contain; object-position: top;">
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <span><strong>備課：</strong></span>
+                                                    鐵粉必收！《哈利波特魔法圖鑑》地圖、咒語、霍格華滋細節全都有
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+
+                                <!-- 第五堂課-拿來確認比例調整的 -->
+                                <div class="col" style="height: 300px;">
+                                    <div class="card h-100">
+                                        <div class="card-img-container" style="position: relative; min-height: 50%; overflow: hidden;">
+                                            <img id="card-img" src="./images/ASP.NET MVC 教學- 由入門到進階- 9 比1 線上課程平台.jpg" class="card-img-top" alt="...">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                跟著實務學習ASP.NET MVC：第一次寫MVC就上手(附DVD一片)
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右邊留1span -->
+        <div class="col-md-1"><!-- 右邊aside留白 --></div>
+    </div>
+</div>
+<!-- 個人編輯頁面 結束 -->
+
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>

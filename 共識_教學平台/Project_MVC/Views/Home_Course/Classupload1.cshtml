@@ -1,0 +1,450 @@
+﻿@model Project_MVC.Models.ClassCourse
+@{
+	ViewData["Title"] = "Class Upload";
+	if (Context.Session.GetString ("userID") != null) {
+		Layout = "_Layout_Classlogin";
+	}
+	else {
+		Layout = "_Layout_Class";
+	}
+
+}
+
+@*<title>jQuery UI Tabs - Default functionality</title>*@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+	$(function () {
+		$("#tabs").tabs();
+	});
+</script>
+
+@*summernote*@
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script>
+
+	$(document).ready(function () {
+		// 初始化Summernote編輯器
+		$('#summernote').summernote();
+	});
+
+
+</script>
+
+<!-- 這裡是切換點點 -->
+
+<ul class="pagination d-flex justify-content-center align-items-center">
+	<li class="page-item">
+		<a class="page-link bg-transparent border-0" href="/Class/Classupload1">
+			<i class="bi bi-circle-fill"></i>
+		</a>
+	</li>
+	<li class="page-item">
+		<a class="page-link bg-transparent border-0" href="/Class/Classupload2">
+			<i class="bi bi-circle"></i>
+		</a>
+	</li>
+	<li class="page-item">
+		<a class="page-link bg-transparent border-0" href="Class/Classupload3">
+			<i class="bi bi-circle"></i>
+		</a>
+	</li>
+	<li class="page-item">
+		<a class="page-link bg-transparent border-0" href="Class/Classupload4">
+			<i class="bi bi-circle"></i>
+		</a>
+	</li>
+</ul>
+
+<!-- 表單標題 -->
+<div class="pagetitle">
+	<h1 class="text-center">開始一步步成為老師吧</h1>
+</div>
+<!-- 表單頭 -->
+
+<div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">新增課程封面</a></li>
+		<li><a href="#tabs-2">新增章節</a></li>
+		<li><a href="#tabs-3">編輯課程內容</a></li>
+
+	</ul>
+	<div id="tabs-1">
+
+		<form asp-controller="Home_Course" asp-action="Classupload1" method="post" enctype="multipart/form-data">
+			@*			<div class="pagetitle">
+			<h1>新增課程封面</h1>
+			</div>*@
+			<div style="width: 70%; position: relative; left: 50%; margin-left: -35%;">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title"></h5>
+
+						<!-- 輸入課程標題 -->
+						<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">課程標題</label>
+							<div class="col-sm-10">
+								<input asp-for="CourseName" id="Title" type="text" class="form-control" placeholder="請輸入課程名稱" oninput="UpdateClassTitle()">
+							</div>
+						</div>
+
+						<!-- 輸入課程概述 -->
+						<div class="row mb-3">
+							<label for="inputText" class="col-sm-2 col-form-label">課程簡述</label>
+							<div class="col-sm-10">
+								<input name="CourseIntro" type="text" class="form-control" placeholder="請簡短輸入課程介紹">
+							</div>
+						</div>
+
+						<!-- 選擇課程分類 -->
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">課程分類</label>
+							<div class="col-sm-10">
+
+								<select name="CourseCategoryID" class="form-select" aria-label="Default select example">
+									<option value="6" selected>請選擇課程類型</option>
+									<option value="1">程式語言</option>
+									<option value="2">音樂</option>
+									<option value="3">語言</option>
+									<option value="4">投資理財</option>
+									<option value="5">運動</option>
+									<option value="6">其他</option>
+								</select>
+							</div>
+						</div>
+
+						<!-- 設定課程售價 -->
+						<div class="container">
+							<div class="row">
+								<div class="col-6 row mb-3">
+									<label for="inputText" class="col-sm-4 col-form-label">售價</label>
+									<div class="col-sm-8">
+										<div class="input-group" style="width: 80%;">
+											<input asp-for="CoursePrice" id="Price" type="number" class="form-control" placeholder="請設定價格" oninput="UpdateClassPrice()">
+											<span class="input-group-text">NT$</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-6 row mb-3">
+									<label for="inputText" class="col-sm-4 col-form-label">課程時長</label>
+									<div class="col-sm-8">
+										<div class="input-group" style="width: 95%;">
+											<input asp-for="CourseDuration" id="Minute" type="number" class="form-control" placeholder="請預估課程總時長">
+											<span class="input-group-text">分鐘</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+						@*上傳介紹影片、封面照片*@
+						<div class="container">
+
+							<div class="row">
+								@*上傳封面*@
+								<div class="col-6" style="background-color: none;">
+									<!-- 上傳按鈕 -->
+									<label for="formFiles" class="border border-secondary border-2 rounded p-1 mb bg-body"
+										   style="cursor: pointer; width: 300px; display: flex; justify-content: center; align-items: center;">
+										<i class="bi bi-cloud-arrow-up"></i>上傳封面圖片
+									</label>
+									<br />
+
+									<!-- 隱藏的input標籤 -->
+									<div class="col-sm-10">
+										@*<input asp-for="CourseImageUrl" class="form-control" type="text" id="formFile" value="@ViewBag.ImgUrl" style="display:none">*@
+										<input name="img" class="form-control" type="file" id="formFiles" style="display:none"
+											   onchange="previewImage(event)">
+									</div>
+
+									@*圖片預覽*@
+									<div class="card" style="width: 300px; height: auto;">
+										<div style="width: 300px; height: 200px; overflow: hidden;">
+											<img id="preview" src="#" alt="預覽圖片" style="display: none; border-radius:5px; width: 100%; height: auto;">
+										</div>
+
+										<div class="card-body">
+											<div class="card-text" id="ClassTitle" style="font-size: 24px; color: #012970; margin-bottom: 0;font-weight: 600;"></div>
+											<div class="card-text" id="UserName" style="font-size: 12px; color:dimgrey; margin-bottom: 0;font-weight: 600;">@ViewBag.userName</div>
+											<p class="card-text container">
+												<div class="row">
+													<div class="card-text col-md-auto" style="font-size: 12px; color:dimgrey; margin-bottom: 0;font-weight: 600;"></div>
+													<div class="col-md-auto" style="font-size: 12px; color:dimgrey; margin-bottom: 0;font-weight: 600;"></div>
+													<!-- <div class="col-md-auto"style="font-size: 12px; color:dimgrey; margin-bottom: 0;font-weight: 600;">購課人數</div> -->
+												</div>
+											</p>
+											<div class="card-text" id="ClassPrice" style="font-size: 20px;"></div>
+										</div>
+									</div>
+									<!-- 課程預覽語法 -->
+									<script>
+										function UpdateClassTitle() {
+											var input = document.getElementById('Title');
+											var classTitle = document.getElementById('ClassTitle');
+											classTitle.textContent = input.value;
+										}
+
+										function UpdateClassPrice() {
+											var input = document.getElementById('Price');
+											var classPrice = document.getElementById("ClassPrice");
+											classPrice.textContent = "NT$ " + input.value;
+										}
+
+										function previewImage(event) {
+											var input = event.target;
+											var preview = document.getElementById('preview');
+											var classTitle = document.getElementById('ClassTitle');
+
+											var classprice = document.getElementById("ClassPrice");
+											if (input.files && input.files[0]) {
+												var reader = new FileReader();
+
+												reader.onload = function (e) {
+													preview.src = e.target.result;
+													preview.style.display = 'block';
+													classTitle.textContent = document.getElementById('Title').value;
+													classTitle.style.display = 'block';
+
+													classprice.style.display = 'block';
+												}
+												reader.readAsDataURL(input.files[0]);
+											}
+										}
+									</script>
+								</div>
+
+
+
+								@*上傳介紹影片*@
+								<div class="col-6" style="background-color:none">
+
+									<label for="Upload" class="border border-secondary border-2 rounded p-1 mb bg-body"
+										   style="cursor: pointer; width: 300px; display: flex; justify-content: center; align-items: center;">
+										<i class="bi bi-cloud-arrow-up"></i>上傳介紹影片
+									</label>
+									<br />
+
+									<!-- 隱藏的input標籤 -->
+									<div class="col-sm-10">
+										@*<input asp-for="CourseIntroVideo" class="form-control" id="Uploads" style="display:none">*@
+										<input name="video" id="Upload" type="file" style="display: none;" accept="video/*,video/mp4" onchange="previewVideo(event)">
+										@*										<input type="file" accept="video/mp4" name="video[0]">
+										<input type="file" accept="video/mp4" name="video[1]">*@
+
+										<input name="video" class="form-control" type="file" id="Uploads" style="display:none"
+											   onchange="previewImage(event)">
+									</div>
+
+									<div class="card" style="width: 300px; height: 200px;">
+										<div style="width: 300px; height: 200px;">
+											<video id="preview2" controls style="border-radius: 5px; width: 100%; height: 100%; object-fit: cover;"></video>
+
+
+											<script>
+												function previewVideo(event) {
+													var input = event.target;
+													var preview2 = document.getElementById('preview2');
+													if (input.files && input.files[0]) {
+														var reader = new FileReader();
+
+														reader.onload = function (e) {
+															preview2.src = e.target.result;
+															preview2.style.display = 'block';
+														}
+
+														reader.readAsDataURL(input.files[0]);
+													}
+												}
+											</script>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 儲存按鈕 -->
+				<div class="row mb-3">
+					<div class="col-sm-10 text-start">
+						<button type="submit" class="btn btn-primary">儲存</button>
+					</div>
+				</div>
+			</div>
+
+			<br />
+
+			<!-- 表單結尾 -->
+		</form>
+	</div>
+
+	<div id="tabs-2">
+		<form asp-controller="Home_Course" asp-action="ClassChaptertoPost" method="post" enctype="multipart/form-data">
+			<main id="" class="" style="background-color:white;">
+				@*				<div class="pagetitle">
+				<h1>新增章節</h1>
+				</div>*@
+				<div style="width: 70%; position: relative; left: 50%; margin-left: -35%;">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title"></h5>
+							<div class="accordion accordion-flush" id="accordionFlushExample">
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="flush-headingOne">
+										<button class="accordion-button" type="button" data-bs-toggle="collapse"
+												data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+											展開全部單元
+										</button>
+									</h2>
+									<div id="flush-collapseOne" class="accordion-collapse collapse show"
+										 aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+										<div class="accordion-body">
+											<button type="button" id="createchapter" class="btn btn-primary add-chapter-btn">
+												新增章節
+											</button>
+
+											<!-- <a class="" data-bs-toggle="collapse" href="#chaptercollapse" role="button"
+																aria-expanded="true" aria-controls="chaptercollapse"><i class="bi bi-cloud-arrow-up"></i></a> -->
+											<div id="chaptercollapse" class="collaps">
+												<div id="container">
+												</div>
+												<div class="row mb-3">
+
+													<script>
+														var chaptercount = 1;
+														var i = 0;
+														// 按鈕點擊
+														document.getElementById('createchapter').addEventListener('click', function (event) {
+															//document.getElementById('createchapter').textContent = `ClassChapter[${i}].ChapterTitle`;
+
+															if (event.target.classList.contains('add-chapter-btn')) {
+																// 章節容器
+																var chapterContainer = document.createElement('div');
+																chapterContainer.className = 'chapter';
+
+																// 章節lbel
+																var chapterLabel = document.createElement('label');
+																chapterLabel.textContent = '第' + chaptercount + '章';
+
+																// 章節輸入框
+																var chapterInput = document.createElement('input');
+																//chapterInput.setAttribute('asp-for', 'ChapterTitle');
+																chapterInput.name = `ClassChapters[${i}].ChapterTitle`;
+																chapterInput.type = 'text';
+																chapterInput.className = 'form-control chapter-input col-2';
+																chapterInput.style = "width: 50%";
+
+																// 包覆章節按鈕
+																var controlContainer = document.createElement('div');
+																controlContainer.className = 'd-flex align-items-center';
+
+																var deleteBtn = document.createElement('button');
+																deleteBtn.className = 'btn btn-danger delete-btn ms-2';
+																deleteBtn.textContent = '刪除';
+
+																var videoBtn = document.createElement('input')
+																videoBtn.name = `CourseVideo`;
+																videoBtn.className = 'form-control';
+																videoBtn.style = "width: 30%";
+																videoBtn.multiple = true;
+
+																videoBtn.type = "file";
+																videoBtn.accept = "video/*,video/mp4";
+																i++
+																chaptercount++;
+
+																var collapseBtn = document.createElement('button')
+																collapseBtn.className = 'btn btn-danger delete-btn ms-2';
+
+																// 创建單元容器
+																var unitContainer = document.createElement('div');
+																unitContainer.className = 'unit-container';
+
+																// 刪除新增單元
+																deleteBtn.addEventListener('click', function () {
+																	// 删除对应的單元容器
+																	chapterContainer.remove();
+
+																});
+																// 将章節标题输入框和新增單元按钮添加到控制容器中
+																chapterContainer.appendChild(chapterLabel);
+																controlContainer.appendChild(chapterInput);
+																controlContainer.appendChild(videoBtn);
+																controlContainer.appendChild(deleteBtn);
+
+
+
+																// 将控制容器添加到章節容器中
+																chapterContainer.appendChild(controlContainer);
+
+																// 将單元容器添加到章節容器中
+																chapterContainer.appendChild(unitContainer);
+
+																// 将章節容器添加到主容器中
+																document.querySelector('#container').appendChild(chapterContainer);
+
+															}
+														});
+													</script>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<br><br>
+								<div class="col-sm-10 text-start">
+									<button type="submit" class="btn btn-primary">儲存</button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+			</main>
+		</form>
+	</div>
+
+	<div id="tabs-3">
+
+		<div style="">
+			<div>
+				<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+						aria-expanded="false" aria-controls="collapseExample2">
+					展開
+				</button>
+			</div>
+
+
+
+			<div class="collapse show" id="collapseExample2">
+				<div class="card card-body">
+					<div>
+						<form asp-controller="Home_Course" asp-action="CourseContents" method="post">
+
+							<textarea id="summernote" name="CourseContent" type="text" class="form-control" placeholder="請簡短輸入課程介紹"></textarea>
+							<div class="row mb-3">
+								<div class="col-sm-10 text-start">
+									<button type="submit" class="btn btn-primary">儲存</button>
+								</div>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync ("_ValidationScriptsPartial");
+	}
+}

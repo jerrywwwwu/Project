@@ -1,0 +1,186 @@
+﻿@model Project_MVC.Models.User
+@{
+    ViewData["Title"] = "共識 - 會員註冊";
+}
+
+<div class="container paddingtopspacing">
+    <h1><strong>會員註冊</strong></h1>
+
+    <div class="row p-4">
+
+        @*左邊預覽照片*@
+        <div class="col p-1">
+            <div class="card" style="width: 17rem; height: 17rem; background-color:rgb(221, 212, 212);">
+                <div class="rounded-circle overflow-hidden" style="height: 17rem">
+                    <img id="PreviewImage" src="~/images/Userimg.jpg" class="card-img-top" alt="..." style="width: 100%; height: 100%; object-fit: cover; background-color: rgb(221, 212, 212);" onload="AdjustImageSize()">
+                </div>
+            </div>
+        </div>
+
+        @*右邊放資料填寫*@
+        <div class="col col-md-8 p-2">
+            <form asp-controller="Home_Login" asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group py-1">
+                    <label asp-for="UserName" class="control-label">名字</label>
+                    <input asp-for="UserName" class="form-control" placeholder="請輸入你的名字" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="UserGender" class="form-label">性別</label>
+                    <select asp-for="UserGender" class="form-select" required>
+                        <option value="" selected disabled>請選擇性別</option>
+                        <option value="Male">男性</option>
+                        <option value="Female">女性</option>
+                    </select>
+                    <span asp-validation-for="UserGender" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="UserEmail" class="control-label">信箱</label>
+                    <input asp-for="UserEmail" class="form-control" placeholder="請輸入信箱" />
+                    <span asp-validation-for="UserEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label asp-for="UserPassword" class="form-label">密碼</label>
+                    <div class="input-group">
+                        <input asp-for="UserPassword" id="passwordInput" class="form-control" type="password" placeholder="請輸入密碼" required />
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                    <span asp-validation-for="UserPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group py-1">
+                    <label class="form-label">確認密碼</label>
+                    <div class="input-group">
+                        <input type="password" id="ConfirmPasswordInput" class="form-control" placeholder="請再次輸入密碼" required />
+                        <button class="btn btn-outline-secondary" type="button" id="ConfirmtogglePassword">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="text-danger" id="confirmPasswordError"></span>
+                </div>
+                <div class="form-group py-1">
+                    <div class="form-group">
+                        <label asp-for="UserImageUrl" class="control-label">上傳個人照片</label>
+                        <input asp-for="UserImageUrl" class="form-control" style="display:none" />
+                        <input type="file" name="img" class="form-control" id="PhotoInput" onchange="previewPhoto(event)" />
+                        <span asp-validation-for="UserImageUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div class="form-group py-1">
+                        <input type="submit" value="註冊會員" class="btn btn-primary" />
+                        <a asp-controller="Home" asp-action="Index"><input type="button" value="取消註冊" class="btn btn-danger" /></a>
+                    </div>
+                    <a asp-action="Index">回到首頁</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+
+    @*首次輸入密碼的眼睛密碼效果*@
+        document.getElementById("togglePassword").addEventListener("mousedown", function () {
+            var passwordInput = document.getElementById("passwordInput");
+            passwordInput.type = "text";
+        });
+    document.getElementById("togglePassword").addEventListener("mouseup", function () {
+        var passwordInput = document.getElementById("passwordInput");
+        passwordInput.type = "password";
+    });
+
+    @*確認密碼的眼睛密碼效果*@
+        document.getElementById("ConfirmtogglePassword").addEventListener("mousedown", function () {
+            var passwordInput = document.getElementById("ConfirmPasswordInput");
+            passwordInput.type = "text";
+        });
+    document.getElementById("ConfirmtogglePassword").addEventListener("mouseup", function () {
+        var passwordInput = document.getElementById("ConfirmPasswordInput");
+        passwordInput.type = "password";
+    });
+
+    @*檢查輸入的兩次密碼是否一致*@
+        document.getElementById('ConfirmPasswordInput').addEventListener('keyup', function () {
+            var passwordInput = document.getElementById('passwordInput').value;
+            var confirmPasswordInput = this.value;
+            var confirmPasswordError = document.getElementById('confirmPasswordError');
+
+            if (passwordInput === confirmPasswordInput) {
+                confirmPasswordError.innerHTML = '';
+            } else {
+                confirmPasswordError.innerHTML = '確認密碼與輸入密碼不相符';
+            }
+        });
+
+    @*換照片，可以預覽照片*@
+        function previewPhoto(event) {
+            var input = event.target;
+            var previewImage = document.getElementById('PreviewImage');
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+    @*會顯示預設的照片，後端會處理"如果使用者沒指定，就用我預設的當作他的大頭照"*@
+                    previewImage.src = '/images/Userimg.jpg';
+            }
+        }
+
+
+        //這個函式應該暫時不用，因為create是機器人幫我生的，應該會自動跟後台有關係
+
+        //function uploadPhoto(event) {
+        //    var photoInput = document.getElementById('PhotoInput');
+
+        //    if (photoInput.files.length > 0) {
+        //        // 使用者選擇了圖片，進行上傳
+        //        //event.preventDefault(); // 阻止表單的提交
+
+        //        var form = document.getElementById("registerForm");
+        //        var formData = new FormData(form);
+
+        //        // 使用 AJAX 提交表單
+        //        $.ajax({
+        //            url: '@Url.Action("Register", "Users")',
+        //            type: 'POST',
+        //            data: formData,
+        //            contentType: false,
+        //            processData: false,
+        //            success: function (data) {
+        //                // 成功處理返回的數據（可選）
+        //                // 這裡可以做一些成功後的處理，例如顯示註冊成功的提示訊息
+        //                // 然後重定向到註冊成功的頁面或其他處理
+        //            },
+        //            error: function (error) {
+        //                // 處理錯誤（可選）
+        //                // 這裡可以做一些錯誤處理，例如顯示錯誤訊息
+        //            }
+        //        });
+        //    }
+        //    // 不管是否有選擇照片，都讓表單正常提交
+        //    return true;
+        //}
+
+
+</script>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

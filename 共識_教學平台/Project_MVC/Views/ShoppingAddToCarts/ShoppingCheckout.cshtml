@@ -1,0 +1,155 @@
+﻿@model List<Project_MVC.Models.ViewBuiedCoursesName>
+
+@{
+    ViewData["Title"] = "共識 - 購物車付款";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet">
+
+<div class="container paddingtopspacing">
+    <div class="container">
+        <h1>購物車</h1>
+        <div class="row">
+            <div class="col">
+                @*這邊顯示流程step進行到哪裡，是購物區還是結帳區*@
+                <div class="row text-center">
+                    <div class="col col-lg-4"><button type="button" class="btn btn-outline-light" disabled></button></div>
+                    <div class="col col-lg-2"><button type="button" class="btn btn-outline-secondary" disabled>購物車</button></div>
+                    <div class="col col-lg-2"><button type="button" class="btn btn-secondary" disabled>結帳區</button></div>
+                    <div class="col col-lg-4"><button type="button" class="btn btn-outline-light" disabled></button></div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">課程數</th>
+                            <th scope="col">課程名稱</th>
+                            <th scope="col">課程價格</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @{
+                            int CourseQuantity = 0;
+                        }
+                        @foreach (var item in Model) {
+                            CourseQuantity++;
+                            <tr>
+                            @*要讓系統自動判斷買了幾門課*@
+                            <td>@CourseQuantity</td>
+                            <td>@item.CourseName</td>
+                                <td>@Convert.ToInt32(item.CoursePrice)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @*結帳小卡*@
+                @{
+                    @*計算價格總和*@ int totalPriceSumCheck = Convert.ToInt32(Model.Sum(item => item.CoursePrice));
+                    @*先寫死 int totalPriceSumCheck = 10000;*@
+                }
+                <form method="post" action="" id="myForm">
+                    <div class="card w-50">
+                        <div class="card-body">
+                            @*<input type="submit" value="測試用送出訂單V1" />*@
+
+                            <h5 class="card-title"><strong>訂單明細</strong></h5>
+                            <p class="card-text">購買課程數： @CourseQuantity 門課程</p>
+                            <p class="card-text" name="qqq">訂單金額：NT$ @totalPriceSumCheck</p>
+                            <button type="button" id="CreditCardPayButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreditCardPayModal">
+                                信用卡付款
+                            </button>
+                            <input type="submit" value="送出訂單VTEST" class="btn btn-success" hidden />
+                            <input type="submit" value="送出訂單" class="btn btn-success" id="SendOrderForm" />
+                            @*<input type="submit" value="送出訂單V2" />
+                            <button type="button" class="btn btn-success" id="SendOrderForm">送出訂單</button>*@
+                        </div>
+                    </div>
+                    <input type="hidden" name="HiddentotalPriceSumCheck" value="@totalPriceSumCheck" />
+                    @foreach (var item in Model)
+                    {
+                        <input type="hidden" name="PikachuCat" value="@item.CourseId" />
+                        <input type="hidden" name="PikachuDog" value="@item.CoursePrice" />
+                    }
+                    @*<input type="submit" value="送出訂單" />*@
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    @*信用卡付款表單，這個是沒有用的，單純做出信用卡結帳效果*@
+    <div class="modal fade" id="CreditCardPayModal" tabindex="-1" aria-labelledby="CreditCardModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="CreditCardModalLabel"> <strong>信用卡付款</strong> </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="CreditCardForm">
+                        <form class="mb-3 mt-md-4">
+                            <div class="mb-3">
+                                <label for="UserCreditCardName" class="form-label">持卡人姓名:</label>
+                                <input type="text" class="form-control" id="UserCreditCardName" placeholder="請輸入持卡人姓名" required>
+                            </div>
+                            <!-- http://www.centerbbs.com/forum.php?mod=viewthread&tid=150866 -->
+                            <div class="mb-3">
+                                <label for="UserCreditCardNumber" class="form-label">信用卡號:</label>
+                                <div class="d-flex">
+                                    <input type="text" class="form-control me-1" name="pan_no1" size="4" value="" maxlength="4" onKeyUp="setBlur(this,'pan_no2');" required>
+                                    <input type="text" class="form-control me-1" name="pan_no2" size="4" value="" maxlength="4" onKeyUp="setBlur(this,'pan_no3');" required>
+                                    <input type="text" class="form-control me-1" name="pan_no3" size="4" value="" maxlength="4" onKeyUp="setBlur(this,'pan_no4');" required>
+                                    <input type="text" class="form-control" name="pan_no4" size="4" value="" maxlength="4" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="UserCreditCardDuedate" class="form-label">到期日:</label>
+                                <input class="form-control" id="UserCreditCardDuedate" placeholder="MM/YY" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="UserCreditCardCSC" class="form-label">信用卡安全碼:</label>
+                                <input type="text" class="form-control" id="UserCreditCardCSC" placeholder="請輸入信用卡安全碼(三位數)" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="UserCellphone" class="form-label">手機號碼:</label>
+                                <input type="tel" class="form-control" id="UserCellphone" placeholder="請輸入持卡人手機號碼" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">確認送出</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    document.getElementById('myForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // 阻止預設的表單提交行為
+
+        Swal.fire({
+            icon: 'success',
+            title: '感謝您的購買，一起加入學習的行列',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定',
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // 如果用戶點擊了 "是的，提交吧！"，則手動觸發表單提交
+                document.getElementById('myForm').submit();
+            }
+        });
+    });
+
+
+</script>

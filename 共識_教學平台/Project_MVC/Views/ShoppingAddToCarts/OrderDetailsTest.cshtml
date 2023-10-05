@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Project_MVC.Models.ShoppingOrderDetail>
+@{  ViewData["Title"] = "OrderDetailsTest"; }
+
+<h1>課程明細測試</h1>
+@*從ShoppingOrderDetail資料表抓來的*@
+
+
+@*<ul>
+    @foreach (var item in ViewBag.SeeMyCourses) {
+        <li>@item.OrderDetailId</li>
+        <li>@item.CourseId</li>
+        <li>@item.Price</li>
+    }
+</ul>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>訂單明細資料表ID</th>
+            <th>課程ID</th>
+            <th>課程價格</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.SeeMyCourses) {
+            <tr>
+                <td>@item.OrderDetailId</td>
+                <td>@item.CourseId</td>
+                <td>@item.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
